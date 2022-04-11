@@ -1,0 +1,134 @@
+.TextField {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #E07A5F;
+    -fx-text-fill: #fff;
+
+    -fx-font-size: 18;
+
+}
+.TextField:hover {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #CA6702;
+    -fx-font-size: 18;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold ;
+}
+
+
+.TextField:focused {
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: #CA6702;
+    -fx-font-size: 18;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold ;
+}
+.Button {
+    -fx-border-width: 2 2 2 2 ;
+    -fx-background-color:  #E07A5F;
+    -fx-font-size: 22;
+
+}
+
+.Button:focused {
+    -fx-font-weight: bold;
+    -fx-border-width: 5 5 5 5 ;
+}
+.Button:hover {
+    -fx-font-weight: bold;
+    -fx-border-width: 5 5 5 5 ;
+}
+
+.Button:pressed {
+    -fx-font-weight: bold;
+    -fx-border-width: 5 5 5 5 ;
+    -fx-background-color: #CA6702;
+}
+.close-btn {
+    -fx-background-color: transparent;
+}
+.close-btn:hover {
+    -fx-background-color: rgba(232, 63, 63, 0.8);
+
+}
+
+.min-btn {
+    -fx-background-color: transparent;
+
+}
+.min-btn:hover {
+    -fx-background-color: rgba(206, 173, 124, 0.8);
+}
+.error-box {
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color:  red  ;
+}
+.regular-date{
+    -fx-text-fill: black;
+}
+.regular-date:hover {
+    -fx-background-color: #b6976b;
+}
+.previus-date {
+    -fx-text-fill: gray;
+}
+.previus-date:hover {
+    -fx-background-color: rgba(128, 128, 128, 0.4);
+}
+
+.selected-date {
+    -fx-text-fill: white;
+    -fx-background-color: #CA6702;
+    -fx-font-weight: bold;
+    -fx-background-radius: 1em;
+    -fx-border-radius: 2em;
+    -fx-border-width: 5;
+    -fx-border-color: transparent;
+    -fx-font-size: 18;
+}
+.selected-date:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #CA6702;
+    -fx-font-weight: bold;
+    -fx-background-radius: 1em;
+    -fx-border-radius: 2em;
+    -fx-border-width: 5;
+    -fx-border-color: transparent;
+    -fx-font-size: 18;
+
+}
+
+
+
+
+
+.free-date {
+    -fx-text-fill: rgba(224, 122, 95, 0.69);
+}
+
+.free-date:hover {
+   -fx-background-color: #f5b85e;
+
+}
+
+
+.next-date {
+    -fx-text-fill: gray;
+}
+.next-date:hover {
+    -fx-background-color: rgba(128, 128, 128, 0.4);
+}
+
+.workday:hover {
+    -fx-background-color:  #65a183;
+    -fx-background-radius: 2em;
+}
+
+
+
+
+
+
+
+
+

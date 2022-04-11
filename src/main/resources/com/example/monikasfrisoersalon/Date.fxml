@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+
+<Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectDate" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 1em; -fx-border-radius: 2em; -fx-border-width: 5; -fx-border-color: transparent;" stylesheets="@../../../CSS/ColorPalletCSS.css" text="1" textAlignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.DateController">
+   <font>
+      <Font name="Century Gothic" size="18.0" />
+   </font>
+   <opaqueInsets>
+      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+   </opaqueInsets>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</Label>

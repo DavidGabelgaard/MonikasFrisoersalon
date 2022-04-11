@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F2CC8F; -fx-background-radius: 1em; -fx-min-width: 3px;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.MainPageController">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="1000.0" style="-fx-background-color: #d0a954; -fx-background-radius: 1em 1em 0 0;" />
+      <AnchorPane layoutY="50.0" prefHeight="84.0" prefWidth="1000.0" style="-fx-background-color: #cba24d;">
+         <children>
+            <Text layoutX="306.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kalender" wrappingWidth="193.25022977941165">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="month" layoutX="643.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="April" textAlignment="RIGHT" wrappingWidth="326.25022977941177">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="year" layoutX="491.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2022" wrappingWidth="123.25022977941177">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Label onMouseClicked="#minimize" prefHeight="50.0" prefWidth="50.0" styleClass="min-btn" stylesheets="@../../../CSS/ColorPalletCSS.css">
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="MINUS" selectionStart="1" size="30" textAlignment="CENTER" translateX="7.0" wrappingWidth="22.0" />
+         </graphic>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </Label>
+      <Pane layoutX="376.0" layoutY="207.0" prefHeight="450.0" prefWidth="550.0">
+         <children>
+            <HBox prefHeight="450.0" prefWidth="550.0">
+               <children>
+                  <VBox fx:id="MON" prefHeight="439.0" prefWidth="77.0" spacing="30.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="TUE" layoutX="10.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="WED" layoutX="85.0" layoutY="10.0" prefHeight="393.0" prefWidth="75.0" spacing="30.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="THU" layoutX="160.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="FRI" layoutX="235.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="SAT" layoutX="310.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="SUN" layoutX="385.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <AnchorPane layoutX="355.0" layoutY="118.0" prefHeight="95.0" prefWidth="552.0">
+         <children>
+            <Label alignment="CENTER" layoutX="50.0" layoutY="40.0" prefHeight="25.0" prefWidth="50.0" text="MAN">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="125.0" layoutY="40.0" prefHeight="25.0" prefWidth="50.0" text="TIR">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="40.0" prefHeight="25.0" prefWidth="50.0" text="ONS">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="275.0" layoutY="40.0" prefHeight="25.0" prefWidth="50.0" text="TOR">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="40.0" prefHeight="25.0" prefWidth="50.0" text="FRE">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="425.0" layoutY="40.0" prefHeight="25.0" prefWidth="50.0" text="LØR">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="40.0" prefHeight="25.0" prefWidth="50.0" text="SØN">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+            <Line endX="400.0" layoutX="150.0" layoutY="81.0" startX="-100.0" stroke="#686868" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="700.0" prefWidth="300.0" style="-fx-background-radius: 1em 0 0 1em; -fx-background-color: #81B29A;">
+         <children>
+            <Text fx:id="dateAndMonth" layoutX="32.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7. April" wrappingWidth="93.25022977941175">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="TodaysDate" layoutX="28.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Torsdag" wrappingWidth="193.25022977941177">
+               <font>
+                  <Font name="Century Gothic" size="40.0" />
+               </font>
+            </Text>
+            <Circle fill="WHITE" layoutX="41.0" layoutY="348.0" radius="9.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" />
+            <Line endX="-35.0" endY="222.0" fill="WHITE" layoutX="76.0" layoutY="360.0" startX="-35.0" startY="-12.0" stroke="WHITE" strokeWidth="2.0" />
+            <Circle fill="WHITE" layoutX="41.0" layoutY="583.0" radius="13.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" />
+            <Label fx:id="startWorkTime" layoutX="60.0" layoutY="339.0" prefHeight="18.0" prefWidth="39.0" text="Fri" textAlignment="CENTER">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="endWorkTime" layoutX="60.0" layoutY="574.0" prefHeight="18.0" prefWidth="39.0" text="Fri" textAlignment="CENTER">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="task1" layoutX="7.0" layoutY="364.0" onMouseClicked="#OrderPress" prefHeight="50.0" prefWidth="285.0" styleClass="workday" stylesheets="@../../../CSS/ColorPalletCSS.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="13.0" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: #CA6702; -fx-background-radius: 1em;" text="09:00" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Text fill="WHITE" layoutX="59.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="162.25022977941177">
+                     <font>
+                        <Font name="Century Gothic" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #77bd9a; -fx-background-radius: 1em 0 0 0;" />
+            <AnchorPane layoutY="50.0" prefHeight="84.0" prefWidth="300.0" style="-fx-background-color: #65a183;" />
+            <AnchorPane fx:id="task2" layoutX="7.0" layoutY="414.0" prefHeight="50.0" prefWidth="285.0" styleClass="workday" stylesheets="@../../../CSS/ColorPalletCSS.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="13.0" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: #3D405B; -fx-background-radius: 1em;" text="09:00" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Text fill="WHITE" layoutX="59.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="162.25022977941177">
+                     <font>
+                        <Font name="Century Gothic" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane fx:id="task3" layoutX="7.0" layoutY="466.0" prefHeight="50.0" prefWidth="285.0" styleClass="workday" stylesheets="@../../../CSS/ColorPalletCSS.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="13.0" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: #AE2012; -fx-background-radius: 1em;" text="09:00" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Text fill="WHITE" layoutX="59.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="162.25022977941177">
+                     <font>
+                        <Font name="Century Gothic" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane fx:id="task4" layoutX="7.0" layoutY="516.0" prefHeight="50.0" prefWidth="285.0" styleClass="workday" stylesheets="@../../../CSS/ColorPalletCSS.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="13.0" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: #005F73; -fx-background-radius: 1em;" text="09:00" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Text fill="WHITE" layoutX="59.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="162.25022977941177">
+                     <font>
+                        <Font name="Century Gothic" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="topBar" layoutX="-1.0" onDragDetected="#makeStageDraggable" prefHeight="50.0" prefWidth="754.0">
+         <children>
+            <Label layoutX="952.0" onMouseClicked="#close" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 0 1em 0 0;" styleClass="close-btn" stylesheets="@../../../CSS/ColorPalletCSS.css">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" selectionStart="1" size="30" translateX="7.0" wrappingWidth="24.0" />
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Label>
+            <Text fx:id="username" fill="WHITE" layoutX="21.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="170.13671875">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </AnchorPane>
+      <Line endX="400.0" layoutX="501.0" layoutY="660.0" startX="-100.0" stroke="#686868" />
+   </children>
+</AnchorPane>
