@@ -11,7 +11,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Skrivebord/SQL/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../Skrivebord/SQL/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -22,7 +22,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Skrivebord/Test/fontawesomefx-commons-9.1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../Skrivebord/Test/fontawesomefx-commons-9.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -31,7 +31,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Skrivebord/Test/fonts-fontawesome-3.2.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../Skrivebord/Test/fonts-fontawesome-3.2.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -40,7 +40,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Skrivebord/Test/fontawesomefx-fontawesome-4.7.0-9.1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../Skrivebord/Test/fontawesomefx-fontawesome-4.7.0-9.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
