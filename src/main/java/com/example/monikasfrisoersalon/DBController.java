@@ -160,15 +160,6 @@ public class DBController {
         return workDay;
     }
 
-    public static WorkDay addWorkingHoursForSignedInUserToWorkDayClass(LocalDate date) {
-
-
-
-
-
-        return null;
-    }
-
     public static  void createShift(Worker worker , LocalDate date , LocalTime startTime , LocalTime endTime) {
 
         String mySQL = "INSERT INTO skema." + worker.getUserName() + "(currentDate, startTime, endTime) VALUE" + "('" + date + "','" +
@@ -264,4 +255,49 @@ public class DBController {
 
 
     }
+
+
+    public static Orders getOrderFromIdFromSignedInUser(int id) {
+
+
+
+        return null;
+    }
+    public static Orders getOrderFromDateAndTimeFromSignedInUser(LocalDate date , LocalTime time) {
+        // This only works since no 2 orders should have same start time
+        // And the hairdresser is the same since each hairdresser have their respected tables
+
+
+        return null;
+    }
+
+    public static ArrayList<Orders> getAllOrdersFromDate(LocalDate date) {
+        // you need first to get all the hairdressers from the employees database and check each
+        // Table with that employee name
+
+
+
+        return null;
+    }
+
+
+    public static void createOrder(Orders orders) {
+
+    }
+
+    public static void changeExistingOrder() {
+        // Don't do this one yet
+    }
+
+    public static void addTreatment (Treatments treatments) {
+
+    }
+
+
+
+
+
+
+
+
 }
