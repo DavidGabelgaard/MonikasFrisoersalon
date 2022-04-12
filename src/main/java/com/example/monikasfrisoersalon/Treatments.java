@@ -35,5 +35,3 @@ public class Treatments {
     }
 }
 
-
-// this is a git test
