@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="300.0" prefWidth="220.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane prefHeight="540.0" prefWidth="500.0" style="-fx-background-color: F4F1DE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="54.0" prefWidth="500.0">
+         <children>
+            <Text fx:id="username" fill="#3d405b" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tidsbestilling d. 12/4" textAlignment="CENTER" wrappingWidth="500.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="18.0" layoutY="66.0" prefHeight="130.0" prefWidth="343.0">
+         <children>
+            <Text fx:id="username13" fill="#3d405b" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frisør:" wrappingWidth="77.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="username122" fill="#3d405b" layoutX="111.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monika" textAlignment="RIGHT" wrappingWidth="353.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="username1" fill="#3d405b" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn:" wrappingWidth="77.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="username11" fill="#3d405b" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer:" wrappingWidth="196.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="username112" fill="#3d405b" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestillings ID:" wrappingWidth="196.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="username12" fill="#3d405b" layoutX="111.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Majbrit Hansen" textAlignment="RIGHT" wrappingWidth="353.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="username121" fill="#3d405b" layoutX="268.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="72053312" textAlignment="RIGHT" wrappingWidth="196.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="username1211" fill="#3d405b" layoutX="268.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0012" textAlignment="RIGHT" wrappingWidth="196.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Text fx:id="username111" fill="#3d405b" layoutX="21.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestilling:" wrappingWidth="224.0">
+         <font>
+            <Font name="Century Gothic" size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="14.0" layoutY="469.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="108.0" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Rediger" />
+      <Button layoutX="133.0" layoutY="469.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Slet bestilling" />
+      <Button layoutX="310.0" layoutY="469.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Afslut bestilling" />
+      <ScrollPane hbarPolicy="NEVER" layoutX="25.0" layoutY="235.0" prefHeight="150.0" prefWidth="452.0" stylesheets="@../../../CSS/ColorPalletCSS.css" vbarPolicy="NEVER">
+         <content>
+            <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="450.0">
+               <children>
+                  <AnchorPane prefHeight="50.0" prefWidth="439.0" style="-fx-border-width: 2px 2px 0px 2px; -fx-background-color: white; -fx-border-color: gray;">
+                     <children>
+                        <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dameklip" underline="true" />
+                        <Text layoutX="3.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 45 min" />
+                        <Text layoutX="364.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 350 kr" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="50.0" prefWidth="439.0" style="-fx-border-width: 2px 2px 2px 2px; -fx-border-color: gray; -fx-background-color: white;">
+                     <children>
+                        <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retning af bryn med pincet" underline="true" />
+                        <Text layoutX="3.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 15 min" />
+                        <Text layoutX="364.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 100 kr" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Text fx:id="username1111" fill="#3d405b" layoutX="21.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Samlet pris" wrappingWidth="224.0">
+         <font>
+            <Font name="Century Gothic" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="username12111" fill="#3d405b" layoutX="285.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="450 kr" textAlignment="RIGHT" wrappingWidth="196.0">
+         <font>
+            <Font name="Century Gothic" size="24.0" />
+         </font>
+      </Text>
+      <CheckBox layoutX="459.0" layoutY="406.0" mnemonicParsing="false" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+      <Text layoutX="359.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Studierabat 15%">
+         <font>
+            <Font name="Century Gothic" size="12.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
