@@ -49,6 +49,7 @@ public class MainPageController {
 
     public WorkDay currentWorkDay;
 
+    public Stage popUp;
 
 
 
@@ -312,7 +313,7 @@ public class MainPageController {
     public void OrderPress() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("PopUp.fxml"));
-            Scene scene = new Scene(fxmlLoader.load() , 220 , 300);
+            Scene scene = new Scene(fxmlLoader.load() , 500 , 540);
 
             Stage s = new Stage();
             s.setScene(scene);
@@ -320,6 +321,8 @@ public class MainPageController {
             s.initStyle(StageStyle.TRANSPARENT);
             s.show();
 
+
+            popUp = s;
 
             // this is new
 
@@ -334,7 +337,11 @@ public class MainPageController {
 
 
 
-
+    public void closePopUp() {
+        if (popUp != null) {
+            popUp.close();
+        }
+    }
 
 
 

@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -268,5 +269,6 @@
          </cursor>
       </AnchorPane>
       <Line endX="400.0" layoutX="501.0" layoutY="660.0" startX="-100.0" stroke="#686868" />
+      <Polygon fill="#bfa175" layoutX="956.0" layoutY="390.0" points="-50.0, 40.0, 50.0, 40.0, 1.0, -20.0" rotate="90.0" scaleY="0.5" scaleZ="0.5" stroke="TRANSPARENT" strokeType="INSIDE" />
    </children>
 </AnchorPane>

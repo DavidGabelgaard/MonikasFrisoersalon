@@ -41,6 +41,9 @@ public class StartApplication extends Application {
 
                 System.out.println("press");
 
+                MainPageController mainPageController = currentFXMLLoader.getController();
+
+                mainPageController.closePopUp();
 
 
 
