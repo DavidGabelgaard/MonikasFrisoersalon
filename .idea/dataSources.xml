@@ -8,11 +8,11 @@
       <jdbc-url>jdbc:mysql://localhost:3306/skema</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="@4.tcp.ngrok.io" uuid="c8fbe751-8ec1-45d1-a8ce-803fe63fe423">
+    <data-source source="LOCAL" name="MySQL" uuid="c8fbe751-8ec1-45d1-a8ce-803fe63fe423">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://4.tcp.ngrok.io:14979</jdbc-url>
+      <jdbc-url>jdbc:mysql://2.tcp.eu.ngrok.io:14244</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
