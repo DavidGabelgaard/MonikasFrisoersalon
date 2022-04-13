@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/skema</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="David" uuid="498739be-4b8b-40b9-94e1-f1c92a5ee677">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://2.tcp.eu.ngrok.io:14244</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
