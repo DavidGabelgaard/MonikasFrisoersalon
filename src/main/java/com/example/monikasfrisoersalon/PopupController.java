@@ -21,6 +21,8 @@ public class PopupController {
     @FXML
     public void initialize() {
         hairdresserCombobox.getItems().setAll("Annika", "Henriette", "Kasper", "Monika", "Susan");
+        costumerNameTextField.setText(costumerName.getText());
+        phoneNumberTextField.setText(phoneNumber.getText());
     }
 
     @FXML

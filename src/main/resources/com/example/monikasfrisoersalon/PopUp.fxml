@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -64,8 +65,8 @@
                </font>
             </Text>
             <ComboBox fx:id="hairdresserCombobox" disable="true" layoutX="314.0" layoutY="1.0" prefWidth="150.0" promptText="Monika" visible="false" visibleRowCount="5" />
-            <TextField fx:id="costumerNameTextField" disable="true" layoutX="240.0" layoutY="30.0" prefHeight="25.0" prefWidth="224.0" text="Majbrit Hansen" visible="false" />
-            <TextField fx:id="phoneNumberTextField" disable="true" layoutX="240.0" layoutY="58.0" prefHeight="25.0" prefWidth="224.0" text="72053312" visible="false" />
+            <TextField fx:id="costumerNameTextField" disable="true" layoutX="240.0" layoutY="30.0" prefHeight="25.0" prefWidth="224.0" visible="false" />
+            <TextField fx:id="phoneNumberTextField" disable="true" layoutX="240.0" layoutY="58.0" prefHeight="25.0" prefWidth="224.0" visible="false" />
          </children>
       </AnchorPane>
       <Text fill="#3d405b" layoutX="21.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestilling:" wrappingWidth="224.0">
@@ -85,16 +86,23 @@
                      <children>
                         <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dameklip" underline="true" />
                         <Text layoutX="3.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 45 min" />
-                        <Text layoutX="364.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 350 kr" />
+                        <Text layoutX="296.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 350 kr" />
+                        <Button layoutX="415.0" layoutY="13.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: #f13a37;" text="-" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="50.0" prefWidth="439.0" style="-fx-border-width: 2px 2px 2px 2px; -fx-border-color: gray; -fx-background-color: white;">
                      <children>
                         <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retning af bryn med pincet" underline="true" />
                         <Text layoutX="3.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 15 min" />
-                        <Text layoutX="364.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 100 kr" />
+                        <Text layoutX="296.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 100 kr" />
+                        <Button layoutX="415.0" layoutY="15.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: #f13a37;" text="-" />
                      </children>
                   </AnchorPane>
+                  <Button mnemonicParsing="false" text="Tilføj service">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
          </content>
