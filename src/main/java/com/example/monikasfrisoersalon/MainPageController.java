@@ -114,7 +114,6 @@ public class MainPageController {
 
 
 
-
     public WorkDay getWorkDayFromLabel(Label date) {
 
         int _day = Integer.parseInt( date.getText());
@@ -127,21 +126,7 @@ public class MainPageController {
     }
 
 
-    //region Animations
 
-
-
-
-
-
-
-
-
-
-
-
-
-    //endregion
 
 
 
@@ -289,7 +274,11 @@ public class MainPageController {
 
             index ++;
 
-            if (index >= 42) index = 0;
+
+
+
+                if (index >= 42) index = 0;
+
 
 
         } catch (IOException e) {
@@ -298,6 +287,7 @@ public class MainPageController {
 
 
     }
+
 
     @FXML
     public void seeLastMonth(MouseEvent event) {
@@ -399,6 +389,7 @@ public class MainPageController {
 
 
 
+
     //endregion
 
     //region visualControllers
@@ -442,7 +433,10 @@ public class MainPageController {
     public void close () {
         StartApplication.stage.close();
     }
-//endregion
+
+    //endregion
+
+    //region PopUp
 
     public void OrderPress() {
         try {
@@ -468,9 +462,6 @@ public class MainPageController {
 
     }
 
-
-
-
     public void closePopUp() {
         if (popUp != null) {
             popUp.close();
@@ -478,6 +469,182 @@ public class MainPageController {
     }
 
 
+    //endregion
+
+    //region Visual
+
+    @FXML
+    public void seeLastMonth(MouseEvent event) {
+
+        if (previousMonthAvailable) {
+
+            deactivateButtons();
+
+            Animation animation = new Timeline(
+                    new KeyFrame(Duration.seconds(0.5f),
+                            new KeyValue(scrollPane.hvalueProperty(), scrollPane.getHvalue() - 0.5d)),
+                    new KeyFrame(Duration.seconds(0.1d)));
+            animation.play();
+            animation.setOnFinished(e -> lastMonthAnimFinished());
+
+
+        }
+    }
+
+    private void lastMonthAnimFinished() {
+        if (currentMonthDisplayed == 1) {
+            currentMonthDisplayed = 12;
+            currentYearDisplayed --;
+        } else {
+            currentMonthDisplayed--;
+        }
+
+        month.setText(Formatter.getMonthFromInt(currentMonthDisplayed));
+        year.setText(Integer.toString(currentYearDisplayed));
+
+        populateCalender(g_previousMonth , h_currentMonth);
+        scrollPane.setHvalue(0.5d);
+
+
+        populateCalender(g_currentMonth , h_NextMonth);
+
+
+        activateButton(nextMonth);
+
+
+        g_NextMonth = g_currentMonth;
+
+        g_currentMonth = g_previousMonth;
+
+        if (currentMonthDisplayed == 1) {
+            g_previousMonth = new GenerateMonth(currentYearDisplayed - 1  , 12 );
+        } else {
+            g_previousMonth = new GenerateMonth(currentYearDisplayed, currentMonthDisplayed - 1);
+        }
+        populateCalender( g_previousMonth , h_lastMonth);
+
+        activateButton(lastMonth);
+
+    }
+
+    @FXML
+    public void seeNextMonth(MouseEvent event) {
+
+        if (nextMonthAvailable) {
+
+            deactivateButtons();
+
+            Animation animation = new Timeline(
+                    new KeyFrame(Duration.seconds(0.5f),
+                            new KeyValue(scrollPane.hvalueProperty(), scrollPane.getHvalue() + 0.5d)));
+            animation.play();
+            animation.setOnFinished(e -> nextMonthAnimFinished() );
+
+        }
+    }
+
+    public void nextMonthAnimFinished() {
+        if (currentMonthDisplayed == 12) {
+            currentMonthDisplayed = 1;
+            currentYearDisplayed ++;
+        } else {
+            currentMonthDisplayed ++;
+        }
+
+        month.setText(Formatter.getMonthFromInt(currentMonthDisplayed));
+        year.setText(Integer.toString(currentYearDisplayed));
+
+        populateCalender(g_NextMonth , h_currentMonth);
+        scrollPane.setHvalue(0.5d);
+
+        populateCalender(g_currentMonth , h_lastMonth);
+
+        activateButton(lastMonth);
+
+        g_previousMonth = g_currentMonth;
+        g_currentMonth = g_NextMonth;
+
+        if (currentMonthDisplayed == 12 ) {
+            g_NextMonth = new GenerateMonth(currentYearDisplayed  + 1 ,1);
+        } else {
+            g_NextMonth = new GenerateMonth(currentYearDisplayed, currentMonthDisplayed + 1);
+        }
+
+        populateCalender(g_NextMonth , h_NextMonth);
+
+        activateButton(nextMonth);
+
+    }
+
+    public boolean nextMonthAvailable = true;
+    public boolean previousMonthAvailable = true;
+
+    @FXML
+    public void hoverStart(MouseEvent event) {
+
+        if (nextMonthAvailable && (( Polygon ) event.getSource()).getId().equals("nextMonth")) {
+            Polygon polygon = (Polygon) event.getSource();
+
+            polygon.setFill(Paint.valueOf("0x5b524aff"));
+        }
+
+       if (previousMonthAvailable && (( Polygon ) event.getSource()).getId().equals("lastMonth")) {
+            Polygon polygon = (Polygon) event.getSource();
+
+            polygon.setFill(Paint.valueOf("0x5b524aff"));
+        }
+
+
+    }
+    @FXML
+    public void hoverEnd(MouseEvent event) {
+
+        if (nextMonthAvailable && (( Polygon ) event.getSource()).getId().equals("nextMonth")) {
+            Polygon polygon = (Polygon) event.getSource();
+
+            polygon.setFill(Paint.valueOf("0x867155ff"));
+        }
+
+        if (previousMonthAvailable && (( Polygon ) event.getSource()).getId().equals("lastMonth")) {
+            Polygon polygon = (Polygon) event.getSource();
+
+            polygon.setFill(Paint.valueOf("0x867155ff"));
+        }
+    }
+
+
+
+
+    public void deactivateButtons() {
+
+        String color = "0xb99c78ff";
+
+        nextMonthAvailable = false;
+        previousMonthAvailable = false;
+
+        nextMonth.setFill(Paint.valueOf(color));
+        lastMonth.setFill(Paint.valueOf(color));
+
+    }
+
+    public void activateButton(Polygon button) {
+
+        button.setFill(Paint.valueOf("0x867155ff"));
+
+        if (button == nextMonth) {
+            nextMonthAvailable = true;
+        } else {
+            previousMonthAvailable = true;
+        }
+
+
+
+    }
+
+
+
+
+    //endregion
 
 
     //region Visual

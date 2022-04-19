@@ -10,15 +10,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="sqlite-jdbc-3.36.0.3" level="application" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:17-ea+11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:17-ea+11" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac:17-ea+11" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:17-ea+11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:17-ea+11" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:17-ea+11" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:17-ea+11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:17-ea+11" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac:17-ea+11" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:17-ea+11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:17-ea+11" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:17-ea+11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
@@ -26,6 +25,26 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:23.0.0" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/build/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/demo/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/generated/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/legacy/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/main/core-api/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/main/core-impl/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/main/protocol-impl/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/main/user-api/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/main/user-impl/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-java-8.0.28/src/test/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -35,7 +54,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://C:/Users/Skrivebord/Test/fontawesomefx-fontawesome-4.7.0-9.1.2.jar!/" />
@@ -44,7 +63,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://C:/Users/Skrivebord/Test/fonts-fontawesome-3.2.1.0.jar!/" />
@@ -53,7 +72,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://C:/Users/Skrivebord/Test/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar!/" />
@@ -65,7 +84,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Lib/Test/fontawesomefx-commons-9.1.2.jar!/" />
+          <root url="jar://$USER_HOME$/OneDrive/Skrivebord/Test/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -74,7 +93,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Lib/Test/fontawesomefx-fontawesome-4.7.0-9.1.2.jar!/" />
+          <root url="jar://$USER_HOME$/OneDrive/Skrivebord/Test/fontawesomefx-commons-9.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -83,7 +102,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Lib/Test/fonts-fontawesome-3.2.1.0.jar!/" />
+          <root url="jar://$USER_HOME$/OneDrive/Skrivebord/Test/fontawesomefx-fontawesome-4.7.0-9.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -92,7 +111,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Lib/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar!/" />
+          <root url="jar://$USER_HOME$/OneDrive/Skrivebord/Test/fonts-fontawesome-3.2.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

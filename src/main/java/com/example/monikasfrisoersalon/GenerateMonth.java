@@ -10,11 +10,16 @@ public class GenerateMonth {
     private ArrayList<WorkDay> days;
     private DayOfWeek startDay;
     private int daysInTotalInLastMonth;
+    private int year;
+    private int month;
 
 
 
 
     public GenerateMonth(int year , int month) {
+
+        this.year = year;
+        this.month = month;
 
         startDay = LocalDate.of(year , month , 1).getDayOfWeek();
 
@@ -52,5 +57,13 @@ public class GenerateMonth {
 
     public int getDaysInTotalInLastMonth() {
         return daysInTotalInLastMonth;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
     }
 }
