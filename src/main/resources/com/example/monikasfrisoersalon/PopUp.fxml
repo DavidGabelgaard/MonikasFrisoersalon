@@ -2,13 +2,15 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="540.0" prefWidth="500.0" style="-fx-background-color: #F4F1DE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="540.0" prefWidth="500.0" style="-fx-background-color: #F4F1DE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.PopupController">
    <children>
       <AnchorPane prefHeight="54.0" prefWidth="500.0">
          <children>
@@ -21,56 +23,60 @@
       </AnchorPane>
       <AnchorPane layoutX="18.0" layoutY="66.0" prefHeight="130.0" prefWidth="343.0">
          <children>
-            <Text fx:id="username13" fill="#3d405b" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frisør:" wrappingWidth="77.0">
+            <Text fill="#3d405b" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frisør:" wrappingWidth="77.0">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
-            <Text fx:id="username122" fill="#3d405b" layoutX="111.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monika" textAlignment="RIGHT" wrappingWidth="353.0">
+            <Text fx:id="hairdresser" fill="#3d405b" layoutX="111.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monika" textAlignment="RIGHT" wrappingWidth="353.0">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
-            <Text fx:id="username1" fill="#3d405b" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn:" wrappingWidth="77.0">
+            <Text fill="#3d405b" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn:" wrappingWidth="77.0">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
-            <Text fx:id="username11" fill="#3d405b" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer:" wrappingWidth="196.0">
+            <Text fill="#3d405b" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer:" wrappingWidth="196.0">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
-            <Text fx:id="username112" fill="#3d405b" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestillings ID:" wrappingWidth="196.0">
+            <Text fill="#3d405b" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestillings ID:" wrappingWidth="196.0">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
-            <Text fx:id="username12" fill="#3d405b" layoutX="111.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Majbrit Hansen" textAlignment="RIGHT" wrappingWidth="353.0">
+            <Text fx:id="costumerName" fill="#3d405b" layoutX="111.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Majbrit Hansen" textAlignment="RIGHT" wrappingWidth="353.0">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
-            <Text fx:id="username121" fill="#3d405b" layoutX="268.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="72053312" textAlignment="RIGHT" wrappingWidth="196.0">
+            <Text fx:id="phoneNumber" fill="#3d405b" layoutX="268.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="72053312" textAlignment="RIGHT" wrappingWidth="196.0">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
-            <Text fx:id="username1211" fill="#3d405b" layoutX="268.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0013" textAlignment="RIGHT" wrappingWidth="196.0">
+            <Text fx:id="orderID" fill="#3d405b" layoutX="268.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0013" textAlignment="RIGHT" wrappingWidth="196.0">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
+            <ComboBox fx:id="hairdresserCombobox" disable="true" layoutX="314.0" layoutY="1.0" prefWidth="150.0" promptText="Monika" visible="false" visibleRowCount="5" />
+            <TextField fx:id="costumerNameTextField" disable="true" layoutX="240.0" layoutY="30.0" prefHeight="25.0" prefWidth="224.0" text="Majbrit Hansen" visible="false" />
+            <TextField fx:id="phoneNumberTextField" disable="true" layoutX="240.0" layoutY="58.0" prefHeight="25.0" prefWidth="224.0" text="72053312" visible="false" />
          </children>
       </AnchorPane>
-      <Text fx:id="username111" fill="#3d405b" layoutX="21.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestilling:" wrappingWidth="224.0">
+      <Text fill="#3d405b" layoutX="21.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestilling:" wrappingWidth="224.0">
          <font>
             <Font name="Century Gothic" size="24.0" />
          </font>
       </Text>
-      <Button layoutX="14.0" layoutY="469.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="108.0" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Rediger" />
+      <Button fx:id="editButton" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" onAction="#EditOrder" prefHeight="46.0" prefWidth="108.0" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Rediger" />
       <Button layoutX="133.0" layoutY="469.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Slet bestilling" />
       <Button layoutX="310.0" layoutY="469.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Afslut bestilling" />
+      <Button fx:id="saveButton" disable="true" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" onAction="#SaveOrder" prefHeight="46.0" prefWidth="108.0" style="-fx-background-color: #72cc50;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Gem" visible="false" />
       <ScrollPane hbarPolicy="NEVER" layoutX="25.0" layoutY="235.0" prefHeight="150.0" prefWidth="452.0" stylesheets="@../../../CSS/ColorPalletCSS.css" vbarPolicy="NEVER">
          <content>
             <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="450.0">
@@ -93,12 +99,12 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Text fx:id="username1111" fill="#3d405b" layoutX="21.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Samlet pris" wrappingWidth="224.0">
+      <Text fill="#3d405b" layoutX="21.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Samlet pris" wrappingWidth="224.0">
          <font>
             <Font name="Century Gothic" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="username12111" fill="#3d405b" layoutX="285.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="450 kr" textAlignment="RIGHT" wrappingWidth="196.0">
+      <Text fill="#3d405b" layoutX="285.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="450 kr" textAlignment="RIGHT" wrappingWidth="196.0">
          <font>
             <Font name="Century Gothic" size="24.0" />
          </font>
