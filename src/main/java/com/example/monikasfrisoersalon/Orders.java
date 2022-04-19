@@ -1,6 +1,7 @@
 package com.example.monikasfrisoersalon;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -11,12 +12,27 @@ public class Orders {
     private Duration duration;
     private ArrayList<Treatments> treatments;
     private Worker worker;
+    private LocalDate date;
+    private String bookingName;
+    private String bookingPhoneNumber;
+    private String bookingEmail;
 
     public Orders(LocalTime startTime, Duration duration, ArrayList<Treatments> treatments, Worker worker) {
         this.startTime = startTime;
         this.duration = duration;
         this.treatments = treatments;
         this.worker = worker;
+    }
+
+    public Orders(LocalTime startTime, Duration duration, ArrayList<Treatments> treatments, Worker worker, LocalDate date, String bookingName, String bookingPhoneNumber, String bookingEmail) {
+        this.startTime = startTime;
+        this.duration = duration;
+        this.treatments = treatments;
+        this.worker = worker;
+        this.date = date;
+        this.bookingName = bookingName;
+        this.bookingPhoneNumber = bookingPhoneNumber;
+        this.bookingEmail = bookingEmail;
     }
 
     @Override
@@ -29,8 +45,24 @@ public class Orders {
                 '}';
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     public LocalTime getStartTime() {
         return startTime;
+    }
+
+    public String getBookingName() {
+        return bookingName;
+    }
+
+    public String getBookingPhoneNumber() {
+        return bookingPhoneNumber;
+    }
+
+    public String getBookingEmail() {
+        return bookingEmail;
     }
 
     public void setStartTime(LocalTime startTime) {
