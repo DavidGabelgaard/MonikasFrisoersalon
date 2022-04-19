@@ -1,3 +1,4 @@
 # Project exclude paths
 /target/
 /MonikasFrisoersalon.iml/
+/.idea
