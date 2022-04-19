@@ -114,7 +114,6 @@ public class MainPageController {
 
 
 
-
     public WorkDay getWorkDayFromLabel(Label date) {
 
         int _day = Integer.parseInt( date.getText());
@@ -127,21 +126,7 @@ public class MainPageController {
     }
 
 
-    //region Animations
 
-
-
-
-
-
-
-
-
-
-
-
-
-    //endregion
 
 
 
@@ -244,7 +229,6 @@ public class MainPageController {
         }
 
 
-
         DayOfWeek day = generateMonth.getStartDay();
 
         daysUntilMonthBeginsInCalender = day.getValue() - 1;
@@ -298,6 +282,93 @@ public class MainPageController {
 
 
     }
+
+
+
+
+    //endregion
+
+    //region visualControllers
+
+    public void makeStageDraggable(MouseEvent mouseEvent) {
+        topBar.requestFocus();
+        xOffset = mouseEvent.getSceneX();
+        yOffset = mouseEvent.getSceneY();
+
+        topBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        topBar.setOnMouseDragged(event -> {
+            StartApplication.stage.setX(event.getScreenX() - xOffset);
+            StartApplication.stage.setY(event.getScreenY() - yOffset);
+        });
+    }
+
+    public static void styleLabelWithWorkDay(Label date, WorkDay workDay, String type) {
+
+        if (type.equals("")) {
+            type = "regular-date";
+        }
+
+
+
+
+        if ( workDay != null && workDay.getShiftTimes().size() == 0 )
+            type = "free-date";
+
+        date.getStyleClass().add(0 , type);
+
+    }
+
+    @FXML
+    public void minimize() {
+        StartApplication.stage.setIconified(true);
+    }
+    @FXML
+    public void close () {
+        StartApplication.stage.close();
+    }
+
+    //endregion
+
+    //region PopUp
+
+
+    public void OrderPress() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("PopUp.fxml"));
+            Scene scene = new Scene(fxmlLoader.load() , 500 , 540);
+
+            Stage s = new Stage();
+            s.setScene(scene);
+            s.setResizable(false);
+            s.initStyle(StageStyle.TRANSPARENT);
+            s.show();
+
+
+            popUp = s;
+
+            // this is new
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void closePopUp() {
+        if (popUp != null) {
+            popUp.close();
+        }
+    }
+
+
+    //endregion
+
+    //region Visual
 
     @FXML
     public void seeLastMonth(MouseEvent event) {
@@ -353,7 +424,6 @@ public class MainPageController {
 
     }
 
-
     @FXML
     public void seeNextMonth(MouseEvent event) {
 
@@ -388,99 +458,20 @@ public class MainPageController {
 
         activateButton(lastMonth);
 
+        g_previousMonth = g_currentMonth;
+        g_currentMonth = g_NextMonth;
 
-
-
-
-
-
-
-    }
-
-
-
-    //endregion
-
-    //region visualControllers
-
-    public void makeStageDraggable(MouseEvent mouseEvent) {
-        topBar.requestFocus();
-        xOffset = mouseEvent.getSceneX();
-        yOffset = mouseEvent.getSceneY();
-
-        topBar.setOnMousePressed(event -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-        topBar.setOnMouseDragged(event -> {
-            StartApplication.stage.setX(event.getScreenX() - xOffset);
-            StartApplication.stage.setY(event.getScreenY() - yOffset);
-        });
-    }
-
-    public static void styleLabelWithWorkDay(Label date, WorkDay workDay, String type) {
-
-        if (type.equals("")) {
-            type = "regular-date";
+        if (currentMonthDisplayed == 12 ) {
+            g_NextMonth = new GenerateMonth(currentYearDisplayed  + 1 ,1);
+        } else {
+            g_NextMonth = new GenerateMonth(currentYearDisplayed, currentMonthDisplayed + 1);
         }
 
+        populateCalender(g_NextMonth , h_NextMonth);
 
-
-
-        if ( workDay != null && workDay.getShiftTimes().size() == 0 )
-            type = "free-date";
-
-        date.getStyleClass().add(0 , type);
+        activateButton(nextMonth);
 
     }
-
-    @FXML
-    public void minimize() {
-        StartApplication.stage.setIconified(true);
-    }
-    @FXML
-    public void close () {
-        StartApplication.stage.close();
-    }
-//endregion
-
-    public void OrderPress() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("PopUp.fxml"));
-            Scene scene = new Scene(fxmlLoader.load() , 500 , 540);
-
-            Stage s = new Stage();
-            s.setScene(scene);
-            s.setResizable(false);
-            s.initStyle(StageStyle.TRANSPARENT);
-            s.show();
-
-
-            popUp = s;
-
-            // this is new
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-
-
-
-    public void closePopUp() {
-        if (popUp != null) {
-            popUp.close();
-        }
-    }
-
-
-
-
-    //region Visual
 
     public boolean nextMonthAvailable = true;
     public boolean previousMonthAvailable = true;
