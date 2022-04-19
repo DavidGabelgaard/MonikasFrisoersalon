@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -36,6 +37,141 @@
             </Text>
          </children>
       </AnchorPane>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="0.5" layoutX="376.0" layoutY="213.0" prefHeight="450.0" prefWidth="550.0" style="-fx-background-color: transparent;" stylesheets="@../../../CSS/ColorPalletCSS.css" vbarPolicy="NEVER">
+         <content>
+            <Pane prefHeight="450.0" prefWidth="1650.0">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="1650.0">
+                     <children>
+                        <HBox fx:id="h_lastMonth" alignment="TOP_CENTER" prefHeight="450.0" prefWidth="550.0">
+                           <children>
+                              <VBox fx:id="MON" prefHeight="439.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="TUE" layoutX="10.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="WED" layoutX="85.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="THU" layoutX="160.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="FRI" layoutX="235.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="SAT" layoutX="310.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="SUN" layoutX="385.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </HBox>
+                        <HBox fx:id="h_currentMonth" alignment="TOP_CENTER" prefHeight="450.0" prefWidth="550.0">
+                           <children>
+                              <VBox fx:id="MON1" prefHeight="439.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="TUE1" layoutX="10.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="WED1" layoutX="85.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="THU1" layoutX="160.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="FRI1" layoutX="235.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="SAT1" layoutX="310.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="SUN1" layoutX="385.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </HBox>
+                        <HBox fx:id="h_NextMonth" alignment="TOP_CENTER" prefHeight="450.0" prefWidth="550.0">
+                           <children>
+                              <VBox fx:id="MON11" prefHeight="439.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="TUE11" layoutX="10.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="WED11" layoutX="85.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="THU11" layoutX="160.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="FRI11" layoutX="235.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="SAT11" layoutX="310.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="SUN11" layoutX="385.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </content>
+      </ScrollPane>
       <Label onMouseClicked="#minimize" prefHeight="50.0" prefWidth="50.0" styleClass="min-btn" stylesheets="@../../../CSS/ColorPalletCSS.css">
          <graphic>
             <FontAwesomeIconView fill="WHITE" glyphName="MINUS" selectionStart="1" size="30" textAlignment="CENTER" translateX="7.0" wrappingWidth="22.0" />
@@ -44,49 +180,6 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <Pane layoutX="376.0" layoutY="207.0" prefHeight="450.0" prefWidth="550.0">
-         <children>
-            <HBox prefHeight="450.0" prefWidth="550.0">
-               <children>
-                  <VBox fx:id="MON" prefHeight="439.0" prefWidth="77.0" spacing="30.0">
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </VBox>
-                  <VBox fx:id="TUE" layoutX="10.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </VBox>
-                  <VBox fx:id="WED" layoutX="85.0" layoutY="10.0" prefHeight="393.0" prefWidth="75.0" spacing="30.0">
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </VBox>
-                  <VBox fx:id="THU" layoutX="160.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </VBox>
-                  <VBox fx:id="FRI" layoutX="235.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </VBox>
-                  <VBox fx:id="SAT" layoutX="310.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </VBox>
-                  <VBox fx:id="SUN" layoutX="385.0" layoutY="10.0" prefHeight="393.0" prefWidth="77.0" spacing="30.0">
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-      </Pane>
       <AnchorPane layoutX="355.0" layoutY="118.0" prefHeight="95.0" prefWidth="552.0">
          <children>
             <Label alignment="CENTER" layoutX="50.0" layoutY="40.0" prefHeight="25.0" prefWidth="50.0" text="MAN">
@@ -129,7 +222,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="700.0" prefWidth="300.0" style="-fx-background-radius: 1em 0 0 1em; -fx-background-color: #81B29A;">
          <children>
-            <Text fx:id="dateAndMonth" layoutX="32.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7. April" wrappingWidth="93.25022977941175">
+            <Text fx:id="dateAndMonth" layoutX="32.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7. April" wrappingWidth="123.25022977941171">
                <font>
                   <Font name="Century Gothic" size="18.0" />
                </font>
@@ -269,6 +362,15 @@
          </cursor>
       </AnchorPane>
       <Line endX="400.0" layoutX="501.0" layoutY="660.0" startX="-100.0" stroke="#686868" />
-      <Polygon fill="#bfa175" layoutX="956.0" layoutY="390.0" points="-50.0, 40.0, 50.0, 40.0, 1.0, -20.0" rotate="90.0" scaleY="0.5" scaleZ="0.5" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Polygon fx:id="nextMonth" fill="#867155" layoutX="956.0" layoutY="390.0" onMouseEntered="#hoverStart" onMouseExited="#hoverEnd" onMousePressed="#seeNextMonth" points="-50.0, 40.0, 50.0, 40.0, 1.0, -20.0" rotate="90.0" scaleY="0.5" scaleZ="0.5" stroke="TRANSPARENT" strokeType="INSIDE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Polygon>
+      <Polygon fx:id="lastMonth" fill="#867155" layoutX="346.0" layoutY="390.0" onMouseEntered="#hoverStart" onMouseExited="#hoverEnd" onMousePressed="#seeLastMonth" points="-50.0, 40.0, 50.0, 40.0, 1.0, -20.0" rotate="270.0" scaleY="0.5" scaleZ="0.5" stroke="TRANSPARENT" strokeType="INSIDE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Polygon>
    </children>
 </AnchorPane>

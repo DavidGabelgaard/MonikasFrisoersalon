@@ -1,16 +1,21 @@
 package com.example.monikasfrisoersalon;
 
-import javafx.event.ActionEvent;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -21,6 +26,7 @@ import java.util.Objects;
 
 
 public class MainPageController {
+
 
     private Label selectedLabel;
     public AnchorPane topBar;
@@ -43,6 +49,18 @@ public class MainPageController {
 
     public Text TodaysDate;
     public Text dateAndMonth;
+    public Text month;
+    public Text year;
+
+    public ScrollPane scrollPane;
+
+    public HBox h_currentMonth;
+    public HBox h_NextMonth;
+    public HBox h_lastMonth;
+
+    public Polygon nextMonth;
+    public Polygon lastMonth;
+
 
 
     public VBox[] days;
@@ -60,6 +78,13 @@ public class MainPageController {
 
     public ArrayList<Label> dates = new ArrayList<>();
 
+    public GenerateMonth g_previousMonth;
+    public GenerateMonth g_currentMonth;
+    public GenerateMonth g_NextMonth;
+
+
+
+
     private int index;
     private int daysUntilMonthBeginsInCalender;
 
@@ -69,10 +94,20 @@ public class MainPageController {
 
     public void initialize() {
 
+
+        currentMonthDisplayed = LocalDate.now().getMonthValue();
+        currentYearDisplayed = LocalDate.now().getYear();
+
         username.setText(Formatter.bigFirstLetter(Formatter.formatUserName(DBController.getActiveUser())));
 
+        g_previousMonth = new GenerateMonth(LocalDate.now().getYear() , LocalDate.now().getMonthValue() - 1 );
+        g_NextMonth = new GenerateMonth(LocalDate.now().getYear() , LocalDate.now().getMonthValue() + 1);
+        g_currentMonth = new GenerateMonth(LocalDate.now().getYear() , LocalDate.now().getMonthValue());
 
-        populateCalender(LocalDate.now().getYear() , LocalDate.now().getMonthValue());
+        populateCalender(g_previousMonth , h_lastMonth);
+        populateCalender(  g_NextMonth, h_NextMonth);
+        populateCalender(g_currentMonth, h_currentMonth);
+
         selectDateOfToday();
 
     }
@@ -198,14 +233,17 @@ public class MainPageController {
         }
     }
 
-    public void populateCalender(int year , int month) {
+    public void populateCalender(GenerateMonth generateMonth, HBox place) {
 
-        currentMonthDisplayed = month;
-        currentYearDisplayed = year;
 
-       days  = new VBox[] {MON, TUE, WED, THU, FRI, SAT, SUN};
+        days  = new VBox[7];
 
-        GenerateMonth generateMonth = new GenerateMonth ( year , month);
+        for (int i = 0; i < 7; i++) {
+            days[i] = (VBox) place.getChildren().get(i);
+            days[i].getChildren().clear();
+        }
+
+
 
         DayOfWeek day = generateMonth.getStartDay();
 
@@ -213,7 +251,7 @@ public class MainPageController {
 
         for (int i = 1; i <= daysUntilMonthBeginsInCalender; i++) {
 
-            int date =generateMonth.getDaysInTotalInLastMonth() - ( daysUntilMonthBeginsInCalender - i );
+            int date = generateMonth.getDaysInTotalInLastMonth() - ( daysUntilMonthBeginsInCalender - i );
 
             insertDate(date , "previus-date", null);
 
@@ -237,9 +275,6 @@ public class MainPageController {
 
     public void insertDate(int date , String type , WorkDay workDay) {
 
-        System.out.println(date + " " + type + " " + workDay);
-
-
         try {
 
                 Label label = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Date.fxml")));
@@ -254,7 +289,7 @@ public class MainPageController {
 
                 index ++;
 
-                if (index > 42) index = 0;
+                if (index >= 42) index = 0;
 
 
         } catch (IOException e) {
@@ -263,6 +298,106 @@ public class MainPageController {
 
 
     }
+
+    @FXML
+    public void seeLastMonth(MouseEvent event) {
+
+        if (previousMonthAvailable) {
+
+            deactivateButtons();
+
+            Animation animation = new Timeline(
+                    new KeyFrame(Duration.seconds(0.5f),
+                            new KeyValue(scrollPane.hvalueProperty(), scrollPane.getHvalue() - 0.5d)),
+                    new KeyFrame(Duration.seconds(0.1d)));
+            animation.play();
+            animation.setOnFinished(e -> lastMonthAnimFinished());
+
+
+        }
+    }
+
+    private void lastMonthAnimFinished() {
+        if (currentMonthDisplayed == 1) {
+            currentMonthDisplayed = 12;
+            currentYearDisplayed --;
+        } else {
+            currentMonthDisplayed--;
+        }
+
+        month.setText(Formatter.getMonthFromInt(currentMonthDisplayed));
+        year.setText(Integer.toString(currentYearDisplayed));
+
+        populateCalender(g_previousMonth , h_currentMonth);
+        scrollPane.setHvalue(0.5d);
+
+
+        populateCalender(g_currentMonth , h_NextMonth);
+
+
+        activateButton(nextMonth);
+
+
+        g_NextMonth = g_currentMonth;
+
+        g_currentMonth = g_previousMonth;
+
+        if (currentMonthDisplayed == 1) {
+            g_previousMonth = new GenerateMonth(currentYearDisplayed - 1  , 12 );
+        } else {
+            g_previousMonth = new GenerateMonth(currentYearDisplayed, currentMonthDisplayed - 1);
+        }
+        populateCalender( g_previousMonth , h_lastMonth);
+
+        activateButton(lastMonth);
+
+    }
+
+
+    @FXML
+    public void seeNextMonth(MouseEvent event) {
+
+        if (nextMonthAvailable) {
+
+            deactivateButtons();
+
+            Animation animation = new Timeline(
+                    new KeyFrame(Duration.seconds(0.5f),
+                            new KeyValue(scrollPane.hvalueProperty(), scrollPane.getHvalue() + 0.5d)));
+            animation.play();
+            animation.setOnFinished(e -> nextMonthAnimFinished() );
+
+        }
+    }
+
+    public void nextMonthAnimFinished() {
+        if (currentMonthDisplayed == 12) {
+            currentMonthDisplayed = 1;
+            currentYearDisplayed ++;
+        } else {
+            currentMonthDisplayed ++;
+        }
+
+        month.setText(Formatter.getMonthFromInt(currentMonthDisplayed));
+        year.setText(Integer.toString(currentYearDisplayed));
+
+        populateCalender(g_NextMonth , h_currentMonth);
+        scrollPane.setHvalue(0.5d);
+
+        populateCalender(g_currentMonth , h_lastMonth);
+
+        activateButton(lastMonth);
+
+
+
+
+
+
+
+
+    }
+
+
 
     //endregion
 
@@ -309,7 +444,6 @@ public class MainPageController {
     }
 //endregion
 
-
     public void OrderPress() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("PopUp.fxml"));
@@ -344,6 +478,79 @@ public class MainPageController {
     }
 
 
+
+
+    //region Visual
+
+    public boolean nextMonthAvailable = true;
+    public boolean previousMonthAvailable = true;
+
+    @FXML
+    public void hoverStart(MouseEvent event) {
+
+        if (nextMonthAvailable && (( Polygon ) event.getSource()).getId().equals("nextMonth")) {
+            Polygon polygon = (Polygon) event.getSource();
+
+            polygon.setFill(Paint.valueOf("0x5b524aff"));
+        }
+
+       if (previousMonthAvailable && (( Polygon ) event.getSource()).getId().equals("lastMonth")) {
+            Polygon polygon = (Polygon) event.getSource();
+
+            polygon.setFill(Paint.valueOf("0x5b524aff"));
+        }
+
+
+    }
+    @FXML
+    public void hoverEnd(MouseEvent event) {
+
+        if (nextMonthAvailable && (( Polygon ) event.getSource()).getId().equals("nextMonth")) {
+            Polygon polygon = (Polygon) event.getSource();
+
+            polygon.setFill(Paint.valueOf("0x867155ff"));
+        }
+
+        if (previousMonthAvailable && (( Polygon ) event.getSource()).getId().equals("lastMonth")) {
+            Polygon polygon = (Polygon) event.getSource();
+
+            polygon.setFill(Paint.valueOf("0x867155ff"));
+        }
+    }
+
+
+
+
+    public void deactivateButtons() {
+
+        String color = "0xb99c78ff";
+
+        nextMonthAvailable = false;
+        previousMonthAvailable = false;
+
+        nextMonth.setFill(Paint.valueOf(color));
+        lastMonth.setFill(Paint.valueOf(color));
+
+    }
+
+    public void activateButton(Polygon button) {
+
+        button.setFill(Paint.valueOf("0x867155ff"));
+
+        if (button == nextMonth) {
+            nextMonthAvailable = true;
+        } else {
+            previousMonthAvailable = true;
+        }
+
+
+
+    }
+
+
+
+
+    //endregion
 
 
 
