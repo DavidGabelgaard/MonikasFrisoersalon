@@ -13,7 +13,7 @@ public class DBController {
     private static Connection connection;
 
     public static int  connectToDatabase(java.lang.String username , java.lang.String password ) {
-        java.lang.String url = "jdbc:mysql://localhost:3306";
+        java.lang.String url = "jdbc:mysql://0.tcp.eu.ngrok.io:13648";
             try {
                 connection = DriverManager.getConnection(url, username.toLowerCase(), password);
             } catch (SQLException e) {
@@ -178,11 +178,34 @@ public class DBController {
 
     }
 
-    public static void changeShift(String string, LocalDate date , LocalTime startTime , LocalTime endTime) {
+    public static void changeShift(WorkDay wd, String string , LocalTime startTime , LocalTime endTime) {
+        String mySQL = "UPDATE skema." + wd.getShiftTimes().get(0).getWorker().getUserName() + " SET startTime = " + startTime
+                + " AND endTime = " + endTime + " WHERE currentDate = " + wd.getDate() + " AND startTime = " + wd.getShiftTimes().get(0).getStartTime();
+
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.execute(mySQL);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
-    public static void deleteShift() {
+    public static void deleteShift(WorkDay wd) {
+        String mySQL = "DELETE FROM skema." + wd.getShiftTimes().get(0).getWorker().getUserName() + "[WHERE currentDate = " +
+                "'" +wd.getDate() + "'" +  " AND startTime = " + "'" + wd.getShiftTimes().get(0).getStartTime()+ "']" ;
+
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.execute(mySQL);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -263,13 +286,7 @@ public class DBController {
 
         return null;
     }
-    public static Orders getOrderFromDateAndTimeFromSignedInUser(LocalDate date , LocalTime time) {
-        // This only works since no 2 orders should have same start time
-        // And the hairdresser is the same since each hairdresser have their respected tables
 
-
-        return null;
-    }
 
     public static ArrayList<Orders> getAllOrdersFromDate(LocalDate date) {
         // you need first to get all the hairdressers from the employees database and check each
@@ -282,17 +299,40 @@ public class DBController {
 
 
     public static void createOrder(Orders orders) {
+        String mySQL = "INSERT INTO orders." + orders.getWorker().getUserName() + "(orderDate, orderTime, orderDuration, bookingName, bookingPhoneNumber, bookingEmail, treatments)" +
+                "VALUES ('" + orders.getDate() + "','" + orders.getStartTime() + "','" + orders.getDuration() + "','" + orders.getBookingName() + "','" + orders.getBookingPhoneNumber() + "','" + orders.getBookingEmail() +
+                orders.getTreatments() + "')";
 
-        // this is some more test
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.execute(mySQL);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
     public static void changeExistingOrder() {
+
         // Don't do this one yet
     }
 
     public static void addTreatment (Treatments treatments) {
 
+        String mySQL = "INSERT INTO treatments.treatments (name, price, time, backgroundColor) VALUES ('" + treatments.name + "','" +
+                treatments.price + "','" + treatments.time +  "','" + treatments.backgroundColor + "')" ;
+
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.execute(mySQL);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

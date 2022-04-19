@@ -24,6 +24,10 @@ public class ShiftTime {
                 '}';
     }
 
+    public Worker getWorker() {
+        return worker;
+    }
+
     public LocalTime getStartTime() {
         return startTime;
     }

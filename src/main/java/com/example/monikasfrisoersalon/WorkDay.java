@@ -39,6 +39,9 @@ public class WorkDay {
                 '}';
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
 
     public void addShiftTime(ShiftTime shiftTime) {
         this.shiftTimes.add(shiftTime);
