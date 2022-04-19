@@ -17,34 +17,26 @@ public class PopupController {
     public TextField phoneNumberTextField;
     public Button editButton;
     public Button saveButton;
+    public Text service;
+    public Text time;
+    public Text price;
+    public Text totalPrice;
+
+    public Treatments treatments;
 
     @FXML
     public void initialize() {
         hairdresserCombobox.getItems().setAll("Annika", "Henriette", "Kasper", "Monika", "Susan");
         costumerNameTextField.setText(costumerName.getText());
         phoneNumberTextField.setText(phoneNumber.getText());
+        service.setText(treatments.getName());
+        time.setText("Tid: " + treatments.getTime().toString());
+        price.setText("Pris: " + treatments.getPrice() + " kr");
+        totalPrice.setText(price.getText());
     }
-
     @FXML
     private void EditOrder() {
-        hairdresser.setVisible(false);
-        hairdresser.setDisable(true);
-        costumerName.setVisible(false);
-        costumerName.setDisable(true);
-        phoneNumber.setVisible(false);
-        phoneNumber.setDisable(true);
-
-        hairdresserCombobox.setVisible(true);
-        hairdresserCombobox.setDisable(false);
-        costumerNameTextField.setVisible(true);
-        costumerNameTextField.setDisable(false);
-        phoneNumberTextField.setVisible(true);
-        phoneNumberTextField.setDisable(false);
-
-        editButton.setVisible(false);
-        editButton.setDisable(true);
-        saveButton.setVisible(true);
-        saveButton.setDisable(false);
+        showAndHideInfo(false, true);
     }
 
     @FXML
@@ -69,24 +61,27 @@ public class PopupController {
             phoneNumber.setOpacity(1);
         }
 
+        showAndHideInfo(true, false);
+    }
 
-        hairdresser.setVisible(true);
-        hairdresser.setDisable(false);
-        costumerName.setVisible(true);
-        costumerName.setDisable(false);
-        phoneNumber.setVisible(true);
-        phoneNumber.setDisable(false);
+    public void showAndHideInfo(boolean first, boolean second) {
+        hairdresser.setVisible(second);
+        hairdresser.setDisable(first);
+        costumerName.setVisible(second);
+        costumerName.setDisable(first);
+        phoneNumber.setVisible(second);
+        phoneNumber.setDisable(first);
 
-        hairdresserCombobox.setVisible(false);
-        hairdresserCombobox.setDisable(true);
-        costumerNameTextField.setVisible(false);
-        costumerNameTextField.setDisable(true);
-        phoneNumberTextField.setVisible(false);
-        phoneNumberTextField.setDisable(true);
+        hairdresserCombobox.setVisible(first);
+        hairdresserCombobox.setDisable(second);
+        costumerNameTextField.setVisible(first);
+        costumerNameTextField.setDisable(second);
+        phoneNumberTextField.setVisible(first);
+        phoneNumberTextField.setDisable(second);
 
-        editButton.setVisible(true);
-        editButton.setDisable(false);
-        saveButton.setVisible(false);
-        saveButton.setDisable(true);
+        editButton.setVisible(second);
+        editButton.setDisable(first);
+        saveButton.setVisible(first);
+        saveButton.setDisable(second);
     }
 }
