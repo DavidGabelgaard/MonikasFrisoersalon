@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -78,50 +75,40 @@
       <Button layoutX="133.0" layoutY="469.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Slet bestilling" />
       <Button layoutX="310.0" layoutY="469.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Afslut bestilling" />
       <Button fx:id="saveButton" disable="true" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" onAction="#SaveOrder" prefHeight="46.0" prefWidth="108.0" style="-fx-background-color: #72cc50;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Gem" visible="false" />
-      <ScrollPane hbarPolicy="NEVER" layoutX="25.0" layoutY="235.0" prefHeight="150.0" prefWidth="452.0" stylesheets="@../../../CSS/ColorPalletCSS.css" vbarPolicy="NEVER">
-         <content>
-            <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="450.0">
-               <children>
-                  <AnchorPane prefHeight="50.0" prefWidth="439.0" style="-fx-border-width: 2px 2px 0px 2px; -fx-background-color: white; -fx-border-color: gray;">
-                     <children>
-                        <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dameklip" underline="true" />
-                        <Text layoutX="3.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 45 min" />
-                        <Text layoutX="296.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 350 kr" />
-                        <Button layoutX="415.0" layoutY="13.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: #f13a37;" text="-" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="50.0" prefWidth="439.0" style="-fx-border-width: 2px 2px 2px 2px; -fx-border-color: gray; -fx-background-color: white;">
-                     <children>
-                        <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retning af bryn med pincet" underline="true" />
-                        <Text layoutX="3.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 15 min" />
-                        <Text layoutX="296.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 100 kr" />
-                        <Button layoutX="415.0" layoutY="15.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="16.0" style="-fx-background-color: #f13a37;" text="-" />
-                     </children>
-                  </AnchorPane>
-                  <Button mnemonicParsing="false" text="Tilføj service">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
-         </content>
-      </ScrollPane>
       <Text fill="#3d405b" layoutX="21.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Samlet pris" wrappingWidth="224.0">
          <font>
             <Font name="Century Gothic" size="24.0" />
          </font>
       </Text>
-      <Text fill="#3d405b" layoutX="285.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="450 kr" textAlignment="RIGHT" wrappingWidth="196.0">
+      <Text fx:id="totalPrice" fill="#3d405b" layoutX="285.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="350 kr" textAlignment="RIGHT" wrappingWidth="196.0">
          <font>
             <Font name="Century Gothic" size="24.0" />
          </font>
       </Text>
-      <CheckBox layoutX="459.0" layoutY="406.0" mnemonicParsing="false" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+      <CheckBox fx:id="studierabat" layoutX="459.0" layoutY="406.0" mnemonicParsing="false" onAction="#Studierabat" stylesheets="@../../../CSS/ColorPalletCSS.css" />
       <Text layoutX="359.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Studierabat 15%">
          <font>
             <Font name="Century Gothic" size="12.0" />
          </font>
       </Text>
+      <AnchorPane layoutX="21.0" layoutY="233.0" prefHeight="74.0" prefWidth="464.0">
+         <children>
+            <Text fx:id="treatment" fill="#3d405b" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dameklipz" underline="true" wrappingWidth="464.0">
+               <font>
+                  <Font name="Century Gothic" size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="time" fill="#3d405b" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 01:00:00z" wrappingWidth="464.0">
+               <font>
+                  <Font name="Century Gothic" size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="price" fill="#3d405b" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 350 krz" wrappingWidth="464.0">
+               <font>
+                  <Font name="Century Gothic" size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
