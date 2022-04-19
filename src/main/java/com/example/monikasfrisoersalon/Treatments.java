@@ -6,14 +6,14 @@ public class Treatments {
 
     int id;
     String name;
-    int Price;
+    int price;
     LocalTime time;
     String backgroundColor;
 
     public Treatments(int id, String name, int price, LocalTime time, String backgroundColor) {
         this.id = id;
         this.name = name;
-        Price = price;
+        this.price = price;
         this.time = time;
         this.backgroundColor = backgroundColor;
     }
@@ -23,7 +23,7 @@ public class Treatments {
     }
 
     public int getPrice() {
-        return Price;
+        return price;
     }
 
     public LocalTime getTime() {
