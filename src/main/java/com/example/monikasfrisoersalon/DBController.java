@@ -13,7 +13,7 @@ public class DBController {
     private static Connection connection;
 
     public static int  connectToDatabase(java.lang.String username , java.lang.String password ) {
-        java.lang.String url = "jdbc:mysql://localhost:3306";
+        java.lang.String url = "jdbc:mysql://0.tcp.eu.ngrok.io:16835";
             try {
                 connection = DriverManager.getConnection(url, username.toLowerCase(), password);
             } catch (SQLException e) {
@@ -274,10 +274,39 @@ public class DBController {
         }
         return null;
 
-
-
-
     }
+
+    public static Treatments getTreatmentFromName(String name) {
+        String mySQL = "SELECT * FROM treatments.treatments where name = '" + name + "'";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(mySQL);
+            if (resultSet.next()) {
+                return new Treatments(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        resultSet.getTime(4).toLocalTime(),
+                        resultSet.getString(5)
+                );
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public static ArrayList<Treatments> getAllTreatments() {
+        ArrayList<Treatments> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add(getTreatments(i));
+        }
+        return list;
+    }
+
 
 
     public static Orders getOrderFromIdFromSignedInUser(int id) {

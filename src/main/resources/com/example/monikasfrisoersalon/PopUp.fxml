@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="540.0" prefWidth="500.0" style="-fx-background-color: #F4F1DE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.PopupController">
+<AnchorPane prefHeight="540.0" prefWidth="500.0" style="-fx-background-color: #F4F1DE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.PopupController">
    <children>
       <AnchorPane prefHeight="54.0" prefWidth="500.0">
          <children>
@@ -71,9 +71,9 @@
             <Font name="Century Gothic" size="24.0" />
          </font>
       </Text>
-      <Button fx:id="editButton" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" onAction="#EditOrder" prefHeight="46.0" prefWidth="108.0" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Rediger" />
-      <Button layoutX="133.0" layoutY="469.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Slet bestilling" />
-      <Button layoutX="310.0" layoutY="469.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Afslut bestilling" />
+      <Button fx:id="editButton" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" onAction="#EditOrder" prefHeight="46.0" prefWidth="108.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Rediger" />
+      <Button layoutX="139.0" layoutY="469.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="160.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Slet bestilling" />
+      <Button layoutX="310.0" layoutY="469.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="176.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Afslut bestilling" />
       <Button fx:id="saveButton" disable="true" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" onAction="#SaveOrder" prefHeight="46.0" prefWidth="108.0" style="-fx-background-color: #72cc50;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Gem" visible="false" />
       <Text fill="#3d405b" layoutX="21.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Samlet pris" wrappingWidth="224.0">
          <font>
@@ -91,24 +91,43 @@
             <Font name="Century Gothic" size="12.0" />
          </font>
       </Text>
-      <AnchorPane layoutX="21.0" layoutY="233.0" prefHeight="74.0" prefWidth="464.0">
+      <AnchorPane fx:id="bestilling" layoutX="21.0" layoutY="233.0" prefHeight="74.0" prefWidth="464.0">
          <children>
-            <Text fx:id="treatment" fill="#3d405b" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dameklipz" underline="true" wrappingWidth="464.0">
+            <Text fx:id="treatment" fill="#3d405b" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dameklip" underline="true" wrappingWidth="464.0">
                <font>
                   <Font name="Century Gothic" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="time" fill="#3d405b" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 01:00:00z" wrappingWidth="464.0">
+            <Text fx:id="time" fill="#3d405b" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 01:00:00" wrappingWidth="464.0">
                <font>
                   <Font name="Century Gothic" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="price" fill="#3d405b" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 350 krz" wrappingWidth="464.0">
+            <Text fx:id="price" fill="#3d405b" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 350 kr" wrappingWidth="464.0">
                <font>
                   <Font name="Century Gothic" size="20.0" />
+               </font>
+            </Text>
+            <CheckBox fx:id="vask" layoutX="442.0" layoutY="6.0" mnemonicParsing="false" onAction="#extraVask" />
+            <CheckBox fx:id="bryn" layoutX="442.0" layoutY="29.0" mnemonicParsing="false" onAction="#extraBryn" />
+            <CheckBox fx:id="kur" layoutX="442.0" layoutY="53.0" mnemonicParsing="false" onAction="#extraKur" />
+            <Text layoutX="317.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vask og føn: 50 kr" textAlignment="RIGHT" wrappingWidth="115.9375">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="283.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retning af bryn: 50 kr" textAlignment="RIGHT" wrappingWidth="150.0">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="303.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hårkur: 150 kr" textAlignment="RIGHT" wrappingWidth="129.9375">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
+      <ComboBox fx:id="services" disable="true" layoutX="18.0" layoutY="233.0" onAction="#changeInfoOnTreatment" prefHeight="25.0" prefWidth="215.0" visible="false" />
    </children>
 </AnchorPane>
