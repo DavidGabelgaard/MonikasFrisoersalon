@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+
+import java.util.ArrayList;
 
 public class PopupController {
 
@@ -18,26 +21,33 @@ public class PopupController {
     public TextField phoneNumberTextField;
     public Button editButton;
     public Button saveButton;
-    public Text service;
+    public Text treatment;
     public Text time;
     public Text price;
     public Text totalPrice;
+    public AnchorPane bestilling;
+    public ComboBox services;
 
-    public Treatments treatments;
+    public Treatments activeTreatment;
+    public boolean studierabatActive;
 
     @FXML
     public void initialize() {
         hairdresserCombobox.getItems().setAll("Annika", "Henriette", "Kasper", "Monika", "Susan");
+        addServices(DBController.getAllTreatments());
         costumerNameTextField.setText(costumerName.getText());
         phoneNumberTextField.setText(phoneNumber.getText());
-      //  service.setText(treatments.getName());
-      //  time.setText("Tid: " + treatments.getTime().toString());
-      //  price.setText("Pris: " + treatments.getPrice() + " kr");
-        totalPrice.setText(price.getText());
+        activeTreatment = DBController.getTreatments(1);
+        treatment.setText(activeTreatment.getName());
+        time.setText("Tid: " + activeTreatment.getTime());
+        price.setText("Pris: " + activeTreatment.getPrice() + " kr");
+        totalPrice.setText(activeTreatment.getPrice() + " kr");
+        studierabatActive = false;
     }
+
     @FXML
     private void EditOrder() {
-        showAndHideInfo(false, true);
+        showAndHideInfo(true, false);
     }
 
     @FXML
@@ -62,7 +72,13 @@ public class PopupController {
             phoneNumber.setOpacity(1);
         }
 
-        showAndHideInfo(true, false);
+        treatment.setText(services.getValue().toString());
+        activeTreatment = DBController.getTreatmentFromName(treatment.getText());
+        time.setText("Tid: " + activeTreatment.getTime());
+        price.setText("Pris: " + activeTreatment.getPrice() + " kr");
+
+        showAndHideInfo(false, true);
+        updatePrice();
     }
 
     public void showAndHideInfo(boolean first, boolean second) {
@@ -80,6 +96,11 @@ public class PopupController {
         phoneNumberTextField.setVisible(first);
         phoneNumberTextField.setDisable(second);
 
+        bestilling.setVisible(second);
+        bestilling.setDisable(first);
+        services.setVisible(first);
+        services.setDisable(second);
+
         editButton.setVisible(second);
         editButton.setDisable(first);
         saveButton.setVisible(first);
@@ -87,5 +108,23 @@ public class PopupController {
     }
 
     public void Studierabat(ActionEvent event) {
+        studierabatActive = !studierabatActive;
+        updatePrice();
     }
+
+    public void updatePrice() {
+        if (studierabatActive) {
+            totalPrice.setText(activeTreatment.getPrice() * 0.85 + " kr");
+        } else if (!studierabatActive) {
+            totalPrice.setText(activeTreatment.getPrice() + " kr");
+        }
+    }
+
+    public void addServices(ArrayList<Treatments> list) {
+        for (int i = 1; i < list.size(); i++) {
+            services.getItems().add(DBController.getAllTreatments().get(i).name);
+        }
+    }
+
+
 }
