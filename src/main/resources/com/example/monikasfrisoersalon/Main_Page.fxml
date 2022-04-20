@@ -339,7 +339,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane fx:id="orderPanel" layoutX="9.0" layoutY="-250.0" prefHeight="474.0" prefWidth="291.0" style="-fx-background-color: #81B29A; -fx-background-radius: 1em 0 0 1em;">
+            <AnchorPane fx:id="orderPanel" layoutX="9.0" layoutY="220.0" prefHeight="474.0" prefWidth="291.0" style="-fx-background-color: #81B29A; -fx-background-radius: 1em 0 0 1em;">
                <children>
                   <Text layoutX="26.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frisør">
                      <font>
@@ -380,6 +380,7 @@
                         <Font size="18.0" />
                      </font>
                   </TextField>
+                  <ComboBox fx:id="treatments" layoutX="14.0" layoutY="201.0" prefHeight="30.0" prefWidth="193.0" promptText="Dameklip" stylesheets="@../../../CSS/ColorPalletCSS.css" visibleRowCount="8" />
                </children>
             </AnchorPane>
             <AnchorPane layoutY="50.0" prefHeight="168.0" prefWidth="300.0" style="-fx-background-color: #81B29A;" />

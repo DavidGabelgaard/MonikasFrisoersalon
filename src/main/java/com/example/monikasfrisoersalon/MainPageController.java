@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
@@ -44,6 +45,8 @@ public class MainPageController {
     public Label startWorkTime;
     public Label endWorkTime;
 
+    public ComboBox treatments;
+
     public AnchorPane task1;
     public AnchorPane task2;
     public AnchorPane task3;
@@ -80,6 +83,7 @@ public class MainPageController {
     public int currentYearDisplayed;
     public int currentMonthDisplayed;
 
+    public ArrayList<Treatments> allTreatments = new ArrayList<>();
 
     public ArrayList<Label> dates = new ArrayList<>();
 
@@ -112,6 +116,8 @@ public class MainPageController {
 
         selectDateOfToday();
 
+        populateAndGetTreatments();
+
     }
     
 
@@ -122,6 +128,29 @@ public class MainPageController {
 
         return g_currentMonth.getDays().get(_day -1 );
     }
+
+    //region Booking
+
+    public void populateAndGetTreatments() {
+
+        allTreatments = DBController.getAllTreatments();
+        for (Treatments t : allTreatments) {
+            if (t != null) {
+                treatments.getItems().add(t.getName());
+            }
+        }
+
+
+        System.out.println(treatments.getItems().get(1).getClass());
+
+    }
+
+
+
+
+    //endregion
+
+
 
     //region Calender - Month
 

@@ -13,7 +13,7 @@ public class DBController {
     private static Connection connection;
 
     public static int  connectToDatabase(java.lang.String username , java.lang.String password ) {
-        java.lang.String url = "jdbc:mysql://0.tcp.eu.ngrok.io:16835";
+        java.lang.String url = "jdbc:mysql://localhost:3306";
             try {
                 connection = DriverManager.getConnection(url, username.toLowerCase(), password);
             } catch (SQLException e) {
