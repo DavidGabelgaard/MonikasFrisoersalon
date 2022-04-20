@@ -1,5 +1,6 @@
 package com.example.monikasfrisoersalon;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -29,9 +30,9 @@ public class PopupController {
         hairdresserCombobox.getItems().setAll("Annika", "Henriette", "Kasper", "Monika", "Susan");
         costumerNameTextField.setText(costumerName.getText());
         phoneNumberTextField.setText(phoneNumber.getText());
-        service.setText(treatments.getName());
-        time.setText("Tid: " + treatments.getTime().toString());
-        price.setText("Pris: " + treatments.getPrice() + " kr");
+      //  service.setText(treatments.getName());
+      //  time.setText("Tid: " + treatments.getTime().toString());
+      //  price.setText("Pris: " + treatments.getPrice() + " kr");
         totalPrice.setText(price.getText());
     }
     @FXML
@@ -83,5 +84,8 @@ public class PopupController {
         editButton.setDisable(first);
         saveButton.setVisible(first);
         saveButton.setDisable(second);
+    }
+
+    public void Studierabat(ActionEvent event) {
     }
 }

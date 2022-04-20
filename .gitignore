@@ -1,4 +1,5 @@
 # Project exclude paths
+
 # Eclipse
 .classpath
 .project
@@ -15,3 +16,4 @@
 # Maven
 log/
 target/
+

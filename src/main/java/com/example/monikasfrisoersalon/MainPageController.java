@@ -3,6 +3,7 @@ package com.example.monikasfrisoersalon;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -22,6 +23,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -46,6 +48,7 @@ public class MainPageController {
     public AnchorPane task2;
     public AnchorPane task3;
     public AnchorPane task4;
+    public AnchorPane background_SeeAndBook;
 
     public Text TodaysDate;
     public Text dateAndMonth;
@@ -61,6 +64,7 @@ public class MainPageController {
     public Polygon nextMonth;
     public Polygon lastMonth;
 
+    public boolean creatingOrder = false;
 
 
     public VBox[] days;
@@ -117,12 +121,9 @@ public class MainPageController {
     public WorkDay getWorkDayFromLabel(Label date) {
 
         int _day = Integer.parseInt( date.getText());
-        int _month = currentMonthDisplayed;
-        int _year = currentYearDisplayed;
 
-        LocalDate _date = LocalDate.of(_year , _month , _day);
 
-        return DBController.getWorkDayForSignedInUserWithDate(_date);
+        return g_currentMonth.getDays().get(_day -1 );
     }
 
 
@@ -150,7 +151,7 @@ public class MainPageController {
 
 
         currentWorkDay = getWorkDayFromLabel((selectedLabel));
-         updateDailyToDoList();
+        updateDailyToDoList();
     }
 
     public void updateDailyToDoList() {
@@ -189,12 +190,13 @@ public class MainPageController {
         AnchorPane[] tasks = new AnchorPane[] {task1 , task2 , task3 , task4};
 
         for (AnchorPane t:
-             tasks) {
+                tasks) {
             t.setVisible(true);
         }
 
 
         for (int i = 0; i < currentWorkDay.getOrders().size() ; i++) {
+
             Label time = (Label) tasks[i].getChildren().get(0);
             time.setText(currentWorkDay.getOrders().get(i).getStartTime().toString());
 
@@ -229,6 +231,7 @@ public class MainPageController {
         }
 
 
+
         DayOfWeek day = generateMonth.getStartDay();
 
         daysUntilMonthBeginsInCalender = day.getValue() - 1;
@@ -261,96 +264,24 @@ public class MainPageController {
 
         try {
 
-                Label label = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Date.fxml")));
+            Label label = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Date.fxml")));
 
-                label.setText(Integer.toString(date));
+            label.setText(Integer.toString(date));
 
-                styleLabelWithWorkDay(label , workDay , type);
+            styleLabelWithWorkDay(label , workDay , type);
 
-                days [index % 7].getChildren().add(label);
+            days [index % 7].getChildren().add(label);
 
-                dates.add(label);
+            dates.add(label);
 
-                index ++;
+            index ++;
+
+
+
 
                 if (index >= 42) index = 0;
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-
-
-
-    //endregion
-
-    //region visualControllers
-
-    public void makeStageDraggable(MouseEvent mouseEvent) {
-        topBar.requestFocus();
-        xOffset = mouseEvent.getSceneX();
-        yOffset = mouseEvent.getSceneY();
-
-        topBar.setOnMousePressed(event -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-        topBar.setOnMouseDragged(event -> {
-            StartApplication.stage.setX(event.getScreenX() - xOffset);
-            StartApplication.stage.setY(event.getScreenY() - yOffset);
-        });
-    }
-
-    public static void styleLabelWithWorkDay(Label date, WorkDay workDay, String type) {
-
-        if (type.equals("")) {
-            type = "regular-date";
-        }
-
-
-
-
-        if ( workDay != null && workDay.getShiftTimes().size() == 0 )
-            type = "free-date";
-
-        date.getStyleClass().add(0 , type);
-
-    }
-
-    @FXML
-    public void minimize() {
-        StartApplication.stage.setIconified(true);
-    }
-    @FXML
-    public void close () {
-        StartApplication.stage.close();
-    }
-
-    //endregion
-
-    //region PopUp
-
-
-    public void OrderPress() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("PopUp.fxml"));
-            Scene scene = new Scene(fxmlLoader.load() , 500 , 540);
-
-            Stage s = new Stage();
-            s.setScene(scene);
-            s.setResizable(false);
-            s.initStyle(StageStyle.TRANSPARENT);
-            s.show();
-
-
-            popUp = s;
-
-            // this is new
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -359,16 +290,6 @@ public class MainPageController {
 
     }
 
-    public void closePopUp() {
-        if (popUp != null) {
-            popUp.close();
-        }
-    }
-
-
-    //endregion
-
-    //region Visual
 
     @FXML
     public void seeLastMonth(MouseEvent event) {
@@ -424,6 +345,7 @@ public class MainPageController {
 
     }
 
+
     @FXML
     public void seeNextMonth(MouseEvent event) {
 
@@ -458,20 +380,143 @@ public class MainPageController {
 
         activateButton(lastMonth);
 
-        g_previousMonth = g_currentMonth;
-        g_currentMonth = g_NextMonth;
 
-        if (currentMonthDisplayed == 12 ) {
-            g_NextMonth = new GenerateMonth(currentYearDisplayed  + 1 ,1);
-        } else {
-            g_NextMonth = new GenerateMonth(currentYearDisplayed, currentMonthDisplayed + 1);
-        }
 
-        populateCalender(g_NextMonth , h_NextMonth);
 
-        activateButton(nextMonth);
+
+
+
 
     }
+
+
+
+
+    //endregion
+
+    //region visualControllers
+
+    public void makeStageDraggable(MouseEvent mouseEvent) {
+        topBar.requestFocus();
+        xOffset = mouseEvent.getSceneX();
+        yOffset = mouseEvent.getSceneY();
+
+        topBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        topBar.setOnMouseDragged(event -> {
+            StartApplication.stage.setX(event.getScreenX() - xOffset);
+            StartApplication.stage.setY(event.getScreenY() - yOffset);
+        });
+    }
+
+    public static void styleLabelWithWorkDay(Label date, WorkDay workDay, String type) {
+
+        if (type.equals("")) {
+            type = "regular-date";
+        }
+
+
+
+
+        if ( workDay != null && workDay.getShiftTimes().size() == 0 )
+            type = "free-date";
+
+        date.getStyleClass().add(0 , type);
+
+    }
+
+    @FXML
+    public void minimize() {
+        StartApplication.stage.setIconified(true);
+    }
+    @FXML
+    public void close () {
+        StartApplication.stage.close();
+    }
+
+    //endregion
+
+    //region PopUp
+
+    public void OrderPress() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("PopUp.fxml"));
+            Scene scene = new Scene(fxmlLoader.load() , 500 , 540);
+
+            Stage s = new Stage();
+            s.setScene(scene);
+            s.setResizable(false);
+            s.initStyle(StageStyle.TRANSPARENT);
+            s.show();
+
+
+            popUp = s;
+
+            // this is new
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void closePopUp() {
+        if (popUp != null) {
+            popUp.close();
+        }
+    }
+
+
+    //endregion
+
+    //region Visual
+
+    private boolean canChange = true;
+
+    public void seeAndOrder(MouseEvent event) {
+
+        if (canChange) {
+
+            canChange = false;
+
+        Node node = (Node) event.getSource();
+
+        int height = 0;
+
+
+        if (!creatingOrder && node.getId().equals("_bestilling") )
+        height = 84;
+
+            TranslateTransition transition = new TranslateTransition();
+
+            transition.setDuration(Duration.seconds(0.3f));
+            transition.setNode(background_SeeAndBook);
+            transition.setAutoReverse(false);
+
+            transition.setToY(height);
+
+
+            transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim() );
+            transition.play();
+
+
+        }
+    }
+
+        private void afterBackgroundMoveAnim() {
+
+            canChange = true;
+
+            creatingOrder = !creatingOrder;
+
+        }
+
+
+
 
     public boolean nextMonthAvailable = true;
     public boolean previousMonthAvailable = true;
@@ -539,9 +584,22 @@ public class MainPageController {
     }
 
 
-
-
     //endregion
+
+
+    //region Visual
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

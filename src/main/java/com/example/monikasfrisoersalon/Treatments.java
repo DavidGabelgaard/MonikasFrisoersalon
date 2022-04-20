@@ -33,6 +33,18 @@ public class Treatments {
     public String getBackgroundColor() {
         return backgroundColor;
     }
+
+
+    @Override
+    public String toString() {
+        return "Treatments{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", time=" + time +
+                ", backgroundColor='" + backgroundColor + '\'' +
+                '}';
+    }
 }
 
 
