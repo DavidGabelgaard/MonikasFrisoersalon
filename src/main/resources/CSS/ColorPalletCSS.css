@@ -132,7 +132,30 @@
 }
 
 
+.date-field {
+    -fx-background-color: transparent;
+    -fx-font-size:  14;
+    -fx-prompt-text-fill: #2c2c2c;
+}
 
+.date-field:focused {
+    -fx-prompt-text-fill: rgb(70, 70, 70);
+}
+
+.Name-field {
+    -fx-background-color: transparent;
+    -fx-font-size:  16;
+    -fx-prompt-text-fill: #2c2c2c;
+    -fx-text-fill: black;
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: black;
+    -fx-padding:  3px;
+
+}
+
+.Name-field:focused {
+    -fx-prompt-text-fill: rgb(70, 70, 70);
+}
 
 
 
