@@ -29,25 +29,39 @@ public class PopupController {
     public ComboBox services;
 
     public Treatments activeTreatment;
+    public int extraPrice;
     public boolean studierabatActive;
+    public boolean vaskActive;
+    public boolean brynActive;
+    public boolean kurActive;
 
     @FXML
     public void initialize() {
+        activeTreatment = DBController.getTreatments(1);
+
         hairdresserCombobox.getItems().setAll("Annika", "Henriette", "Kasper", "Monika", "Susan");
+        hairdresserCombobox.setPromptText(hairdresser.getText());
         addServices(DBController.getAllTreatments());
+        services.setPromptText(activeTreatment.getName());
         costumerNameTextField.setText(costumerName.getText());
         phoneNumberTextField.setText(phoneNumber.getText());
-        activeTreatment = DBController.getTreatments(1);
+
+
         treatment.setText(activeTreatment.getName());
         time.setText("Tid: " + activeTreatment.getTime());
         price.setText("Pris: " + activeTreatment.getPrice() + " kr");
         totalPrice.setText(activeTreatment.getPrice() + " kr");
+        extraPrice = 0;
         studierabatActive = false;
+        vaskActive = false;
+        brynActive = false;
+        kurActive = false;
     }
 
     @FXML
     private void EditOrder() {
         showAndHideInfo(true, false);
+        totalPrice.setText("-- kr");
     }
 
     @FXML
@@ -72,13 +86,18 @@ public class PopupController {
             phoneNumber.setOpacity(1);
         }
 
-        treatment.setText(services.getValue().toString());
-        activeTreatment = DBController.getTreatmentFromName(treatment.getText());
-        time.setText("Tid: " + activeTreatment.getTime());
-        price.setText("Pris: " + activeTreatment.getPrice() + " kr");
-
         showAndHideInfo(false, true);
         updatePrice();
+    }
+
+    @FXML
+    private void changeInfoOnTreatment() {
+        if (services.getValue() != null) {
+            treatment.setText(services.getValue().toString());
+            activeTreatment = DBController.getTreatmentFromName(treatment.getText());
+            time.setText("Tid: " + activeTreatment.getTime());
+            price.setText("Pris: " + activeTreatment.getPrice() + " kr");
+        }
     }
 
     public void showAndHideInfo(boolean first, boolean second) {
@@ -96,8 +115,8 @@ public class PopupController {
         phoneNumberTextField.setVisible(first);
         phoneNumberTextField.setDisable(second);
 
-        bestilling.setVisible(second);
-        bestilling.setDisable(first);
+        treatment.setVisible(second);
+        treatment.setDisable(first);
         services.setVisible(first);
         services.setDisable(second);
 
@@ -112,11 +131,45 @@ public class PopupController {
         updatePrice();
     }
 
+    public void extraVask() {
+        vaskActive = !vaskActive;
+
+        if (vaskActive) {
+            extraPrice += 50;
+        } else {
+            extraPrice -= 50;
+        }
+        updatePrice();
+    }
+
+    public void extraBryn() {
+        brynActive = !brynActive;
+
+        if (brynActive) {
+            extraPrice += 50;
+        } else {
+            extraPrice -= 50;
+        }
+        updatePrice();
+    }
+
+    public void extraKur() {
+        kurActive = !kurActive;
+
+        if (kurActive) {
+            extraPrice += 150;
+        } else {
+            extraPrice -= 150;
+        }
+        updatePrice();
+    }
+
+
     public void updatePrice() {
         if (studierabatActive) {
-            totalPrice.setText(activeTreatment.getPrice() * 0.85 + " kr");
+            totalPrice.setText((activeTreatment.getPrice() + extraPrice) * 0.85 + " kr");
         } else if (!studierabatActive) {
-            totalPrice.setText(activeTreatment.getPrice() + " kr");
+            totalPrice.setText(activeTreatment.getPrice() + extraPrice + " kr");
         }
     }
 

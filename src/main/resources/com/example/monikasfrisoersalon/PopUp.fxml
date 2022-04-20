@@ -93,23 +93,41 @@
       </Text>
       <AnchorPane fx:id="bestilling" layoutX="21.0" layoutY="233.0" prefHeight="74.0" prefWidth="464.0">
          <children>
-            <Text fx:id="treatment" fill="#3d405b" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dameklipz" underline="true" wrappingWidth="464.0">
+            <Text fx:id="treatment" fill="#3d405b" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dameklip" underline="true" wrappingWidth="464.0">
                <font>
                   <Font name="Century Gothic" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="time" fill="#3d405b" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 01:00:00z" wrappingWidth="464.0">
+            <Text fx:id="time" fill="#3d405b" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tid: 01:00:00" wrappingWidth="464.0">
                <font>
                   <Font name="Century Gothic" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="price" fill="#3d405b" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 350 krz" wrappingWidth="464.0">
+            <Text fx:id="price" fill="#3d405b" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris: 350 kr" wrappingWidth="464.0">
                <font>
                   <Font name="Century Gothic" size="20.0" />
+               </font>
+            </Text>
+            <CheckBox fx:id="vask" layoutX="442.0" layoutY="6.0" mnemonicParsing="false" onAction="#extraVask" />
+            <CheckBox fx:id="bryn" layoutX="442.0" layoutY="29.0" mnemonicParsing="false" onAction="#extraBryn" />
+            <CheckBox fx:id="kur" layoutX="442.0" layoutY="53.0" mnemonicParsing="false" onAction="#extraKur" />
+            <Text layoutX="317.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vask og føn: 50 kr" textAlignment="RIGHT" wrappingWidth="115.9375">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="283.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retning af bryn: 50 kr" textAlignment="RIGHT" wrappingWidth="150.0">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="303.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hårkur: 150 kr" textAlignment="RIGHT" wrappingWidth="129.9375">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
-      <ComboBox fx:id="services" disable="true" layoutX="18.0" layoutY="233.0" prefHeight="25.0" prefWidth="215.0" visible="false" />
+      <ComboBox fx:id="services" disable="true" layoutX="18.0" layoutY="233.0" onAction="#changeInfoOnTreatment" prefHeight="25.0" prefWidth="215.0" visible="false" />
    </children>
 </AnchorPane>
