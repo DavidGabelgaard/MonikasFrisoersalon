@@ -3,6 +3,7 @@ package com.example.monikasfrisoersalon;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -22,6 +23,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -46,6 +48,7 @@ public class MainPageController {
     public AnchorPane task2;
     public AnchorPane task3;
     public AnchorPane task4;
+    public AnchorPane background_SeeAndBook;
 
     public Text TodaysDate;
     public Text dateAndMonth;
@@ -61,6 +64,7 @@ public class MainPageController {
     public Polygon nextMonth;
     public Polygon lastMonth;
 
+    public boolean creatingOrder = false;
 
 
     public VBox[] days;
@@ -117,12 +121,9 @@ public class MainPageController {
     public WorkDay getWorkDayFromLabel(Label date) {
 
         int _day = Integer.parseInt( date.getText());
-        int _month = currentMonthDisplayed;
-        int _year = currentYearDisplayed;
 
-        LocalDate _date = LocalDate.of(_year , _month , _day);
 
-        return DBController.getWorkDayForSignedInUserWithDate(_date);
+        return g_currentMonth.getDays().get(_day -1 );
     }
 
 
@@ -195,6 +196,7 @@ public class MainPageController {
 
 
         for (int i = 0; i < currentWorkDay.getOrders().size() ; i++) {
+
             Label time = (Label) tasks[i].getChildren().get(0);
             time.setText(currentWorkDay.getOrders().get(i).getStartTime().toString());
 
@@ -473,108 +475,48 @@ public class MainPageController {
 
     //region Visual
 
-    @FXML
-    public void seeLastMonth(MouseEvent event) {
+    private boolean canChange = true;
 
-        if (previousMonthAvailable) {
+    public void seeAndOrder(MouseEvent event) {
 
-            deactivateButtons();
+        if (canChange) {
 
-            Animation animation = new Timeline(
-                    new KeyFrame(Duration.seconds(0.5f),
-                            new KeyValue(scrollPane.hvalueProperty(), scrollPane.getHvalue() - 0.5d)),
-                    new KeyFrame(Duration.seconds(0.1d)));
-            animation.play();
-            animation.setOnFinished(e -> lastMonthAnimFinished());
+            canChange = false;
+
+        Node node = (Node) event.getSource();
+
+        int height = 0;
+
+
+        if (!creatingOrder && node.getId().equals("_bestilling") )
+        height = 84;
+
+            TranslateTransition transition = new TranslateTransition();
+
+            transition.setDuration(Duration.seconds(0.3f));
+            transition.setNode(background_SeeAndBook);
+            transition.setAutoReverse(false);
+
+            transition.setToY(height);
+
+
+            transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim() );
+            transition.play();
 
 
         }
     }
 
-    private void lastMonthAnimFinished() {
-        if (currentMonthDisplayed == 1) {
-            currentMonthDisplayed = 12;
-            currentYearDisplayed --;
-        } else {
-            currentMonthDisplayed--;
-        }
+        private void afterBackgroundMoveAnim() {
 
-        month.setText(Formatter.getMonthFromInt(currentMonthDisplayed));
-        year.setText(Integer.toString(currentYearDisplayed));
+            canChange = true;
 
-        populateCalender(g_previousMonth , h_currentMonth);
-        scrollPane.setHvalue(0.5d);
-
-
-        populateCalender(g_currentMonth , h_NextMonth);
-
-
-        activateButton(nextMonth);
-
-
-        g_NextMonth = g_currentMonth;
-
-        g_currentMonth = g_previousMonth;
-
-        if (currentMonthDisplayed == 1) {
-            g_previousMonth = new GenerateMonth(currentYearDisplayed - 1  , 12 );
-        } else {
-            g_previousMonth = new GenerateMonth(currentYearDisplayed, currentMonthDisplayed - 1);
-        }
-        populateCalender( g_previousMonth , h_lastMonth);
-
-        activateButton(lastMonth);
-
-    }
-
-    @FXML
-    public void seeNextMonth(MouseEvent event) {
-
-        if (nextMonthAvailable) {
-
-            deactivateButtons();
-
-            Animation animation = new Timeline(
-                    new KeyFrame(Duration.seconds(0.5f),
-                            new KeyValue(scrollPane.hvalueProperty(), scrollPane.getHvalue() + 0.5d)));
-            animation.play();
-            animation.setOnFinished(e -> nextMonthAnimFinished() );
+            creatingOrder = !creatingOrder;
 
         }
-    }
 
-    public void nextMonthAnimFinished() {
-        if (currentMonthDisplayed == 12) {
-            currentMonthDisplayed = 1;
-            currentYearDisplayed ++;
-        } else {
-            currentMonthDisplayed ++;
-        }
 
-        month.setText(Formatter.getMonthFromInt(currentMonthDisplayed));
-        year.setText(Integer.toString(currentYearDisplayed));
 
-        populateCalender(g_NextMonth , h_currentMonth);
-        scrollPane.setHvalue(0.5d);
-
-        populateCalender(g_currentMonth , h_lastMonth);
-
-        activateButton(lastMonth);
-
-        g_previousMonth = g_currentMonth;
-        g_currentMonth = g_NextMonth;
-
-        if (currentMonthDisplayed == 12 ) {
-            g_NextMonth = new GenerateMonth(currentYearDisplayed  + 1 ,1);
-        } else {
-            g_NextMonth = new GenerateMonth(currentYearDisplayed, currentMonthDisplayed + 1);
-        }
-
-        populateCalender(g_NextMonth , h_NextMonth);
-
-        activateButton(nextMonth);
-
-    }
 
     public boolean nextMonthAvailable = true;
     public boolean previousMonthAvailable = true;
@@ -642,82 +584,22 @@ public class MainPageController {
     }
 
 
-
-
     //endregion
 
 
     //region Visual
 
-    public boolean nextMonthAvailable = true;
-    public boolean previousMonthAvailable = true;
-
-    @FXML
-    public void hoverStart(MouseEvent event) {
-
-        if (nextMonthAvailable && (( Polygon ) event.getSource()).getId().equals("nextMonth")) {
-            Polygon polygon = (Polygon) event.getSource();
-
-            polygon.setFill(Paint.valueOf("0x5b524aff"));
-        }
-
-        if (previousMonthAvailable && (( Polygon ) event.getSource()).getId().equals("lastMonth")) {
-            Polygon polygon = (Polygon) event.getSource();
-
-            polygon.setFill(Paint.valueOf("0x5b524aff"));
-        }
-
-
-    }
-    @FXML
-    public void hoverEnd(MouseEvent event) {
-
-        if (nextMonthAvailable && (( Polygon ) event.getSource()).getId().equals("nextMonth")) {
-            Polygon polygon = (Polygon) event.getSource();
-
-            polygon.setFill(Paint.valueOf("0x867155ff"));
-        }
-
-        if (previousMonthAvailable && (( Polygon ) event.getSource()).getId().equals("lastMonth")) {
-            Polygon polygon = (Polygon) event.getSource();
-
-            polygon.setFill(Paint.valueOf("0x867155ff"));
-        }
-    }
 
 
 
 
-    public void deactivateButtons() {
-
-        String color = "0xb99c78ff";
-
-        nextMonthAvailable = false;
-        previousMonthAvailable = false;
-
-        nextMonth.setFill(Paint.valueOf(color));
-        lastMonth.setFill(Paint.valueOf(color));
-
-    }
-
-    public void activateButton(Polygon button) {
-
-        button.setFill(Paint.valueOf("0x867155ff"));
-
-        if (button == nextMonth) {
-            nextMonthAvailable = true;
-        } else {
-            previousMonthAvailable = true;
-        }
-
-
-
-    }
 
 
 
 
-    //endregion
+
+
+
 
 
 
