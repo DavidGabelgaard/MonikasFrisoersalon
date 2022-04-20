@@ -49,6 +49,7 @@ public class MainPageController {
     public AnchorPane task3;
     public AnchorPane task4;
     public AnchorPane background_SeeAndBook;
+    public AnchorPane orderPanel;
 
     public Text TodaysDate;
     public Text dateAndMonth;
@@ -86,9 +87,6 @@ public class MainPageController {
     public GenerateMonth g_currentMonth;
     public GenerateMonth g_NextMonth;
 
-
-
-
     private int index;
     private int daysUntilMonthBeginsInCalender;
 
@@ -115,8 +113,7 @@ public class MainPageController {
         selectDateOfToday();
 
     }
-
-
+    
 
     public WorkDay getWorkDayFromLabel(Label date) {
 
@@ -125,11 +122,6 @@ public class MainPageController {
 
         return g_currentMonth.getDays().get(_day -1 );
     }
-
-
-
-
-
 
     //region Calender - Month
 
@@ -486,11 +478,13 @@ public class MainPageController {
         Node node = (Node) event.getSource();
 
         int height = 0;
+        int blockPlace = 0;
 
 
-        if (!creatingOrder && node.getId().equals("_bestilling") )
-        height = 84;
-
+        if (!creatingOrder && node.getId().equals("_bestilling") ) {
+            height = 84;
+            blockPlace = 479;
+        }
             TranslateTransition transition = new TranslateTransition();
 
             transition.setDuration(Duration.seconds(0.3f));
@@ -499,9 +493,34 @@ public class MainPageController {
 
             transition.setToY(height);
 
+            TranslateTransition block = new TranslateTransition();
 
-            transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim() );
-            transition.play();
+            block.setDuration(Duration.seconds(0.5f));
+            block.setNode(orderPanel);
+            block.setAutoReverse(false);
+            block.setToY(blockPlace);
+
+
+
+
+            // if (!creatingOrder && node.getId().equals("_bestilling") ) {
+                transition.play();
+                block.play();
+                transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim() );
+/*            }
+            else {
+
+                block.play();
+                block.onFinishedProperty().set( e -> transition.play());
+                transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim());
+
+
+
+            }*/
+
+
+
+
 
 
         }
@@ -587,7 +606,7 @@ public class MainPageController {
     //endregion
 
 
-    //region Visual
+
 
 
 

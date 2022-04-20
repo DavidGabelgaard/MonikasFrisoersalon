@@ -3,8 +3,10 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -337,8 +339,50 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane fx:id="orderPanel" layoutY="225.0" prefHeight="474.0" prefWidth="300.0" style="-fx-background-color: #81B29A; -fx-background-radius: 1em 0 0 1em;" visible="false" />
-            <AnchorPane layoutY="134.0" prefHeight="84.0" prefWidth="300.0" style="-fx-background-color: #81B29A;" />
+            <AnchorPane fx:id="orderPanel" layoutX="9.0" layoutY="-250.0" prefHeight="474.0" prefWidth="291.0" style="-fx-background-color: #81B29A; -fx-background-radius: 1em 0 0 1em;">
+               <children>
+                  <Text layoutX="26.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frisør">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Text>
+                  <ComboBox layoutX="105.0" layoutY="22.0" prefWidth="150.0" promptText="ANY" />
+                  <Text layoutX="26.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato" wrappingWidth="49.999999999999886">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="134.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="18.0">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Text>
+                  <TextField layoutX="105.0" layoutY="59.0" prefHeight="30.0" prefWidth="39.0" promptText="dd" styleClass="date-field" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+                  <TextField layoutX="144.0" layoutY="59.0" prefHeight="30.0" prefWidth="42.0" promptText="mm" styleClass="date-field" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+                  <Text layoutX="177.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="18.0">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Text>
+                  <TextField layoutX="192.0" layoutY="58.0" prefHeight="25.0" prefWidth="61.0" promptText="yyyy" styleClass="date-field" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+                  <Text layoutX="20.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KlipningsType:" wrappingWidth="150.0">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Text>
+                  <TextField layoutX="20.0" layoutY="95.0" prefHeight="30.0" prefWidth="228.0" promptText="Navn - Efternavn" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField alignment="BASELINE_LEFT" layoutX="20.0" layoutY="130.0" prefHeight="30.0" prefWidth="228.0" promptText="Tlf. nr" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="50.0" prefHeight="168.0" prefWidth="300.0" style="-fx-background-color: #81B29A;" />
             <AnchorPane fx:id="background_SeeAndBook" layoutY="50.0" prefHeight="84.0" prefWidth="300.0" style="-fx-background-color: #65a183;" />
             <Text fx:id="_bestilling" fill="WHITE" layoutX="35.0" layoutY="200.0" onMouseClicked="#seeAndOrder" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestilling" textAlignment="CENTER" wrappingWidth="228.13671875">
                <font>

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.TransferMode;
 import javafx.scene.text.Text;
 
 public class PopupController {
@@ -18,7 +19,7 @@ public class PopupController {
     public TextField phoneNumberTextField;
     public Button editButton;
     public Button saveButton;
-    public Text service;
+    public Text treatment;
     public Text time;
     public Text price;
     public Text totalPrice;
@@ -30,7 +31,8 @@ public class PopupController {
         hairdresserCombobox.getItems().setAll("Annika", "Henriette", "Kasper", "Monika", "Susan");
         costumerNameTextField.setText(costumerName.getText());
         phoneNumberTextField.setText(phoneNumber.getText());
-      //  service.setText(treatments.getName());
+
+
       //  time.setText("Tid: " + treatments.getTime().toString());
       //  price.setText("Pris: " + treatments.getPrice() + " kr");
         totalPrice.setText(price.getText());
