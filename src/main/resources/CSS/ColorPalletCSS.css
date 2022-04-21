@@ -132,6 +132,122 @@
 }
 
 
+.date-field {
+    -fx-background-color: transparent;
+    -fx-font-size:  14;
+    -fx-prompt-text-fill: #2c2c2c;
+}
+
+.date-field:focused {
+    -fx-prompt-text-fill: rgb(70, 70, 70);
+}
+
+.Name-field {
+    -fx-background-color: transparent;
+    -fx-font-size:  16;
+    -fx-prompt-text-fill: #2c2c2c;
+    -fx-text-fill: black;
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: black;
+    -fx-padding:  3px;
+
+}
+
+.Name-field:focused {
+    -fx-prompt-text-fill: rgb(70, 70, 70);
+}
+
+.combo-box  {
+    -fx-background-color: transparent;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-radius: 5px 5px 0 0 ;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+.combo-box .list-view  {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 2px 2px 2px;
+    -fx-border-color: black;
+    -fx-font-size: 14;
+    -fx-border-radius: 0 0 5px 5px ;
+
+    -fx-end-margin: 0;
+
+}
+
+
+
+.combo-box-popup .list-view .list-cell{
+
+    -fx-background-color: #65a191;
+    -fx-padding: 4px 0 4px 0;
+    -fx-font-weight: 300 ;
+}
+
+.combo-box-popup .list-view .list-cell:hover  {
+    -fx-background-color: #538579;
+}
+
+
+.combo-box-popup .list-view .list-cell:selected  {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+.combo-box-popup .list-view .scroll-bar .thumb{
+    -fx-background-color : #538579FF;
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+
+}
+
+.combo-box-popup .list-view .scroll-bar {
+    -fx-background-color:  #65A191FF;
+}
+
+
+.combo-box-popup .list-view .scroll-bar:horizontal .track,
+.combo-box-popup .list-view .scroll-bar:vertical .track{
+    -fx-background-color :transparent;
+    -fx-border-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-border-radius :2.0em;
+}
+
+
+.combo-box-popup .list-view .scroll-bar:horizontal .increment-button ,
+.combo-box-popup .list-view .scroll-bar:horizontal .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 0.0 10.0 0.0;
+
+}
+
+.combo-box-popup .list-view .scroll-bar:vertical .increment-button ,
+.combo-box-popup .list-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 10.0 0.0 0.0;
+
+}
+
+.combo-box-popup .list-view .scroll-bar .increment-arrow,
+.combo-box-popup .list-view .scroll-bar .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.15em 0.0;
+}
+
+.combo-box-popup .list-view .scroll-bar:vertical .increment-arrow,
+.combo-box-popup .list-view .scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.0 0.15em;
+}
+
+
+
+
 
 
 

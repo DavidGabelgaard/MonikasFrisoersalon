@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
@@ -44,11 +45,14 @@ public class MainPageController {
     public Label startWorkTime;
     public Label endWorkTime;
 
+    public ComboBox treatments;
+
     public AnchorPane task1;
     public AnchorPane task2;
     public AnchorPane task3;
     public AnchorPane task4;
     public AnchorPane background_SeeAndBook;
+    public AnchorPane orderPanel;
 
     public Text TodaysDate;
     public Text dateAndMonth;
@@ -79,15 +83,13 @@ public class MainPageController {
     public int currentYearDisplayed;
     public int currentMonthDisplayed;
 
+    public ArrayList<Treatments> allTreatments = new ArrayList<>();
 
     public ArrayList<Label> dates = new ArrayList<>();
 
     public GenerateMonth g_previousMonth;
     public GenerateMonth g_currentMonth;
     public GenerateMonth g_NextMonth;
-
-
-
 
     private int index;
     private int daysUntilMonthBeginsInCalender;
@@ -114,9 +116,10 @@ public class MainPageController {
 
         selectDateOfToday();
 
+        populateAndGetTreatments();
+
     }
-
-
+    
 
     public WorkDay getWorkDayFromLabel(Label date) {
 
@@ -126,8 +129,24 @@ public class MainPageController {
         return g_currentMonth.getDays().get(_day -1 );
     }
 
+    //region Booking
+
+    public void populateAndGetTreatments() {
+
+        allTreatments = DBController.getAllTreatments();
+        for (Treatments t : allTreatments) {
+            if (t != null) {
+                treatments.getItems().add(t.getName());
+            }
+        }
 
 
+    }
+
+
+
+
+    //endregion
 
 
 
@@ -486,11 +505,13 @@ public class MainPageController {
         Node node = (Node) event.getSource();
 
         int height = 0;
+        int blockPlace = 0;
 
 
-        if (!creatingOrder && node.getId().equals("_bestilling") )
-        height = 84;
-
+        if (!creatingOrder && node.getId().equals("_bestilling") ) {
+            height = 84;
+            blockPlace = 479;
+        }
             TranslateTransition transition = new TranslateTransition();
 
             transition.setDuration(Duration.seconds(0.3f));
@@ -499,9 +520,34 @@ public class MainPageController {
 
             transition.setToY(height);
 
+            TranslateTransition block = new TranslateTransition();
 
-            transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim() );
-            transition.play();
+            block.setDuration(Duration.seconds(0.5f));
+            block.setNode(orderPanel);
+            block.setAutoReverse(false);
+            block.setToY(blockPlace);
+
+
+
+
+            // if (!creatingOrder && node.getId().equals("_bestilling") ) {
+                transition.play();
+                block.play();
+                transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim() );
+/*            }
+            else {
+
+                block.play();
+                block.onFinishedProperty().set( e -> transition.play());
+                transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim());
+
+
+
+            }*/
+
+
+
+
 
 
         }
@@ -587,7 +633,7 @@ public class MainPageController {
     //endregion
 
 
-    //region Visual
+
 
 
 

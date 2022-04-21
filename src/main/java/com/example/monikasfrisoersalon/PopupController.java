@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -56,6 +57,9 @@ public class PopupController {
         phoneNumberTextField.setText(phoneNumber.getText());
 
 
+
+        totalPrice.setText(price.getText());
+
         treatment.setText(activeTreatment.getName());
         time.setText("Tid: " + activeTreatment.getTime());
         price.setText("Pris: " + activeTreatment.getPrice() + " kr");
@@ -65,6 +69,7 @@ public class PopupController {
         vaskActive = false;
         brynActive = false;
         kurActive = false;
+
     }
 
     @FXML
