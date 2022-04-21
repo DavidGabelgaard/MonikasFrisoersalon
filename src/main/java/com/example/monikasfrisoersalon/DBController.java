@@ -322,6 +322,7 @@ public class DBController {
         return null;
     }
 
+
     public static void createOrder(Orders orders) {
         String mySQL = "INSERT INTO orders." + orders.getWorker().getUserName() + "(orderDate, orderTime, orderDuration, bookingName, bookingPhoneNumber, bookingEmail, treatments)" +
                 "VALUES ('" + orders.getDate() + "','" + orders.getStartTime() + "','" + orders.getDuration() + "','" + orders.getBookingName() + "','" + orders.getBookingPhoneNumber() + "','" + orders.getBookingEmail() +
@@ -339,8 +340,10 @@ public class DBController {
 
     }
 
-    public static void changeExistingOrder(int id) {
-        String mySQL = "UPDATE orders." + getActiveUser();
+    public static void changeExistingOrder(int id, Orders orders, LocalDate orderDate, LocalTime orderTime, LocalTime orderDuration, String bookingName, String bookingPhoneNumber, String bookingEmail, Timestamp timestamp, Treatments treatments) {
+        String mySQL = "UPDATE orders." + orders.getWorker().getUserName() + " SET orderDate" + orderDate + " AND orderTime" + orderTime + " AND orderDuration" + orderDuration +
+        " AND bookingName" + bookingName + " AND bookingPhoneNumber" + bookingPhoneNumber + " AND bookingEmail" + bookingEmail + " AND timeStamp" + timestamp + " AND treatments" + treatments +
+        " WHERE orderID = " + id;
 
         try {
             Statement statement = connection.createStatement();
