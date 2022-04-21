@@ -141,8 +141,6 @@ public class MainPageController {
         }
 
 
-        System.out.println(treatments.getItems().get(1).getClass());
-
     }
 
 
