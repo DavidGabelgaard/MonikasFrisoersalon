@@ -12,8 +12,8 @@ public class DBController {
 
     private static Connection connection;
 
-    public static int  connectToDatabase(java.lang.String username , java.lang.String password ) {
-        java.lang.String url = "jdbc:mysql://0.tcp.eu.ngrok.io:16835";
+    public static int  connectToDatabase(String username , String password ) {
+        String url = "jdbc:mysql://localhost:3306";
             try {
                 connection = DriverManager.getConnection(url, username.toLowerCase(), password);
             } catch (SQLException e) {
@@ -36,7 +36,7 @@ public class DBController {
 
     public static void insertOpeningHoursWithDate(LocalDate date , LocalTime openingTime , LocalTime closingTime) {
 
-    java.lang.String mySQL ="INSERT INTO  skema.opening_hours  (currentDate , openingHour , closingHour ) VALUES ('" + date + "','" +
+    String mySQL ="INSERT INTO  skema.opening_hours  (currentDate , openingHour , closingHour ) VALUES ('" + date + "','" +
         openingTime + "','" + closingTime + "')" ;
         try {
             Statement statement = connection.createStatement();
@@ -51,7 +51,7 @@ public class DBController {
 
     public static WorkDay getOpeningHoursWithDate(LocalDate date) {
 
-        java.lang.String mySQL = "SELECT * FROM skema.opening_hours where currentDate = " + "'" + date + "'";
+        String mySQL = "SELECT * FROM skema.opening_hours where currentDate = " + "'" + date + "'";
 
         try {
             Statement statement = connection.createStatement();
@@ -60,7 +60,7 @@ public class DBController {
 
             if (!resultSet.next()) {
 
-                java.lang.String tempSQLString = "SELECT * FROM  skema.standardopeninghours";
+                String tempSQLString = "SELECT * FROM  skema.standardopeninghours";
 
                 resultSet = statement.executeQuery(tempSQLString);
 
@@ -298,7 +298,6 @@ public class DBController {
         return null;
     }
 
-
     public static ArrayList<Treatments> getAllTreatments() {
         ArrayList<Treatments> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -307,15 +306,12 @@ public class DBController {
         return list;
     }
 
-
-
     public static Orders getOrderFromIdFromSignedInUser(int id) {
 
 
 
         return null;
     }
-
 
     public static ArrayList<Orders> getAllOrdersFromDate(LocalDate date) {
         // you need first to get all the hairdressers from the employees database and check each
@@ -325,7 +321,6 @@ public class DBController {
 
         return null;
     }
-
 
     public static void createOrder(Orders orders) {
         String mySQL = "INSERT INTO orders." + orders.getWorker().getUserName() + "(orderDate, orderTime, orderDuration, bookingName, bookingPhoneNumber, bookingEmail, treatments)" +
