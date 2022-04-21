@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.lang.String;
 import java.util.ArrayList;
+import java.time.Duration;
 
 
 public class DBController {
@@ -13,7 +14,7 @@ public class DBController {
     private static Connection connection;
 
     public static int  connectToDatabase(String username , String password ) {
-        String url = "jdbc:mysql://localhost:3306";
+        String url = "jdbc:mysql://7.tcp.eu.ngrok.io:10513";
             try {
                 connection = DriverManager.getConnection(url, username.toLowerCase(), password);
             } catch (SQLException e) {
@@ -178,7 +179,7 @@ public class DBController {
 
     }
 
-    public static void changeShift(WorkDay wd, String string , LocalTime startTime , LocalTime endTime) {
+    public static void changeShift(WorkDay wd, LocalTime startTime , LocalTime endTime) {
         String mySQL = "UPDATE skema." + wd.getShiftTimes().get(0).getWorker().getUserName() + " SET startTime = " + startTime
                 + " AND endTime = " + endTime + " WHERE currentDate = " + wd.getDate() + " AND startTime = " + wd.getShiftTimes().get(0).getStartTime();
 
@@ -195,8 +196,8 @@ public class DBController {
     }
 
     public static void deleteShift(WorkDay wd) {
-        String mySQL = "DELETE FROM skema." + wd.getShiftTimes().get(0).getWorker().getUserName() + "[WHERE currentDate = " +
-                "'" +wd.getDate() + "'" +  " AND startTime = " + "'" + wd.getShiftTimes().get(0).getStartTime()+ "']" ;
+        String mySQL = "DELETE FROM skema." + wd.getShiftTimes().get(0).getWorker().getUserName() + " [WHERE currentDate = " +
+                "'" + wd.getDate() + "'" +  " AND startTime = " + "'" + wd.getShiftTimes().get(0).getStartTime()+ "']" ;
 
         try {
             Statement statement = connection.createStatement();
@@ -263,9 +264,8 @@ public class DBController {
                         id,
                         resultSet.getString(2),
                         resultSet.getInt(3),
-                         resultSet.getTime(4).toLocalTime(),
-                        resultSet.getString(5)
-                );
+                        resultSet.getTime(4).toLocalTime(),
+                        resultSet.getString(5));
             } else {
                 return null;
             }
@@ -339,9 +339,62 @@ public class DBController {
 
     }
 
-    public static void changeExistingOrder() {
+    public static void changeExistingOrder(int id) {
+        String mySQL = "UPDATE orders." + getActiveUser();
 
-        // Don't do this one yet
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.execute(mySQL);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static void changeWorkerFromOrder(int id, Worker newWorker, Worker oldWorker){
+
+        String mySQL = "SELECT FROM orders." + oldWorker.getUserName() + " WHERE orderID = " + id;
+
+        try {
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(mySQL);
+
+
+            if (resultSet.next()){
+
+                String t = resultSet.getString(9);
+                String[] ts = t.split(",");
+                ArrayList<Treatments> treatmentsArrayList = new ArrayList<>();
+                for (int i = 0; i < ts.length; i++) {
+                    treatmentsArrayList.add(getTreatments(Integer.parseInt(ts[i])));
+                }
+
+
+                Orders order = new Orders(
+                        resultSet.getTime(3).toLocalTime(),
+                        Duration.between(LocalTime.of(0,0), resultSet.getTime(4).toLocalTime()),
+                        treatmentsArrayList,
+                        newWorker,
+                        resultSet.getDate(2).toLocalDate(),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7)
+                );
+
+                deleteOrder(oldWorker,id);
+                createOrder(order);
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void addTreatment (Treatments treatments) {
@@ -357,6 +410,21 @@ public class DBController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public  static void deleteOrder(Worker worker, int id){
+        String mySQL = "DELETE FROM orders."+ worker.getUserName() + " [WHERE orderID = " +
+                "'" + id + "']";
+
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.execute(mySQL);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
