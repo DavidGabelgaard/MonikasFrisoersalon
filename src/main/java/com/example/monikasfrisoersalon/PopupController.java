@@ -2,12 +2,14 @@ package com.example.monikasfrisoersalon;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -22,12 +24,20 @@ public class PopupController {
     public TextField phoneNumberTextField;
     public Button editButton;
     public Button saveButton;
+    public Button deleteButton;
+    public Button completeButton;
+    public Button sletButton;
+    public Button cancel;
+    public Button afslutButton;
+    public Text sletText;
+    public Text afslutText;
     public Text treatment;
     public Text time;
     public Text price;
     public Text totalPrice;
     public AnchorPane bestilling;
     public ComboBox services;
+    public AnchorPane popUp;
 
     public Treatments activeTreatment;
     public int extraPrice;
@@ -39,7 +49,6 @@ public class PopupController {
     @FXML
     public void initialize() {
         activeTreatment = DBController.getTreatments(1);
-
         hairdresserCombobox.getItems().setAll("Annika", "Henriette", "Kasper", "Monika", "Susan");
         hairdresserCombobox.setPromptText(hairdresser.getText());
         addServices(DBController.getAllTreatments());
@@ -93,6 +102,7 @@ public class PopupController {
 
         showAndHideInfo(false, true);
         updatePrice();
+        //DBController.changeExistingOrder();
     }
 
     @FXML
@@ -184,5 +194,67 @@ public class PopupController {
         }
     }
 
+    public void deletePressed() {
+        editButton.setVisible(false);
+        editButton.setDisable(true);
+        deleteButton.setVisible(false);
+        deleteButton.setDisable(true);
+        completeButton.setVisible(false);
+        completeButton.setDisable(true);
 
+        sletButton.setVisible(true);
+        sletButton.setDisable(false);
+        sletText.setVisible(true);
+        cancel.setVisible(true);
+        cancel.setDisable(false);
+    }
+
+    public void completePressed() {
+        editButton.setVisible(false);
+        editButton.setDisable(true);
+        deleteButton.setVisible(false);
+        deleteButton.setDisable(true);
+        completeButton.setVisible(false);
+        completeButton.setDisable(true);
+
+        afslutButton.setVisible(true);
+        afslutButton.setDisable(false);
+        afslutText.setVisible(true);
+        cancel.setVisible(true);
+        cancel.setDisable(false);
+    }
+
+    public void sletPressed() {
+        //DBController.deleteOrder();
+        closePopUp();
+    }
+
+    public void afslutPressed() {
+        //DBController.completeOrder();
+        closePopUp();
+    }
+
+    public void cancelPressed() {
+        editButton.setVisible(true);
+        editButton.setDisable(false);
+        deleteButton.setVisible(true);
+        deleteButton.setDisable(false);
+        completeButton.setVisible(true);
+        completeButton.setDisable(false);
+
+        sletButton.setVisible(false);
+        sletButton.setDisable(true);
+        afslutButton.setVisible(false);
+        afslutButton.setDisable(true);
+        afslutText.setVisible(false);
+        sletText.setVisible(false);
+        cancel.setVisible(false);
+        cancel.setDisable(true);
+    }
+
+
+    public void closePopUp() {
+        Stage s = (Stage) popUp.getScene().getWindow();
+        s.close();
+    }
 }

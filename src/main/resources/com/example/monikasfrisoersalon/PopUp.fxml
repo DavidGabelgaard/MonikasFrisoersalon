@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="540.0" prefWidth="500.0" style="-fx-background-color: #F4F1DE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.PopupController">
+<AnchorPane fx:id="popUp" prefHeight="540.0" prefWidth="500.0" style="-fx-background-color: #F4F1DE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.PopupController">
    <children>
       <AnchorPane prefHeight="54.0" prefWidth="500.0">
          <children>
@@ -72,8 +72,8 @@
          </font>
       </Text>
       <Button fx:id="editButton" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" onAction="#EditOrder" prefHeight="46.0" prefWidth="108.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Rediger" />
-      <Button layoutX="139.0" layoutY="469.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="160.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Slet bestilling" />
-      <Button layoutX="310.0" layoutY="469.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="176.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Afslut bestilling" />
+      <Button fx:id="deleteButton" layoutX="139.0" layoutY="469.0" mnemonicParsing="false" onAction="#deletePressed" prefHeight="46.0" prefWidth="160.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Slet bestilling" />
+      <Button fx:id="completeButton" layoutX="310.0" layoutY="469.0" mnemonicParsing="false" onAction="#completePressed" prefHeight="46.0" prefWidth="176.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Afslut bestilling" />
       <Button fx:id="saveButton" disable="true" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" onAction="#SaveOrder" prefHeight="46.0" prefWidth="108.0" style="-fx-background-color: #72cc50;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Gem" visible="false" />
       <Text fill="#3d405b" layoutX="21.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Samlet pris" wrappingWidth="224.0">
          <font>
@@ -129,5 +129,18 @@
          </children>
       </AnchorPane>
       <ComboBox fx:id="services" disable="true" layoutX="18.0" layoutY="233.0" onAction="#changeInfoOnTreatment" prefHeight="25.0" prefWidth="215.0" visible="false" />
+      <Button fx:id="sletButton" layoutX="245.0" layoutY="469.0" mnemonicParsing="false" onAction="#sletPressed" prefHeight="46.0" prefWidth="108.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Slet" visible="false" />
+      <Button fx:id="cancel" layoutX="373.0" layoutY="469.0" mnemonicParsing="false" onAction="#cancelPressed" prefHeight="46.0" prefWidth="108.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Fortryd" visible="false" />
+      <Button fx:id="afslutButton" layoutX="245.0" layoutY="469.0" mnemonicParsing="false" onAction="#afslutPressed" prefHeight="46.0" prefWidth="108.0" style="-fx-font-size: 18;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Afslut" visible="false" />
+      <Text fx:id="afslutText" fill="#3d405b" layoutX="46.0" layoutY="487.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afslut og bogfør bestillingen?" textAlignment="CENTER" visible="false" wrappingWidth="160.0">
+         <font>
+            <Font name="Century Gothic" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="sletText" fill="#3d405b" layoutX="28.0" layoutY="487.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Slet bestillingen? (Kan ikke gøres om)" textAlignment="CENTER" visible="false" wrappingWidth="196.0">
+         <font>
+            <Font name="Century Gothic" size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
