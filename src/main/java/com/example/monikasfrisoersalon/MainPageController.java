@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -20,6 +21,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -46,6 +49,7 @@ public class MainPageController {
     public Label endWorkTime;
 
     public ComboBox treatments;
+
 
     public AnchorPane task1;
     public AnchorPane task2;
@@ -110,6 +114,12 @@ public class MainPageController {
         g_NextMonth = new GenerateMonth(LocalDate.now().getYear() , LocalDate.now().getMonthValue() + 1);
         g_currentMonth = new GenerateMonth(LocalDate.now().getYear() , LocalDate.now().getMonthValue());
 
+        for (WorkDay l: g_currentMonth.getDays() ) {
+            System.out.println(l);
+        }
+
+
+
         populateCalender(g_previousMonth , h_lastMonth);
         populateCalender(  g_NextMonth, h_NextMonth);
         populateCalender(g_currentMonth, h_currentMonth);
@@ -117,6 +127,7 @@ public class MainPageController {
         selectDateOfToday();
 
         populateAndGetTreatments();
+        populateHairdressers();
 
     }
     
@@ -129,7 +140,103 @@ public class MainPageController {
         return g_currentMonth.getDays().get(_day -1 );
     }
 
+
     //region Booking
+
+    public HBox m_Table;
+    public HBox mid_Table;
+    public HBox e_Table;
+
+    public ComboBox workers;
+
+    public AnchorPane datePane;
+
+    public TextField dd;
+    public TextField mm;
+    public TextField yy;
+
+    @FXML
+    public void updateTables() {
+
+        try {
+            int d = Integer.parseInt(dd.getText());
+            int m = Integer.parseInt(mm.getText());
+            int y = Integer.parseInt(yy.getText());
+        try {
+
+            LocalDate localDate = LocalDate.of(y, m, d);
+
+            validDate();
+
+            if (!workers.getValue().equals("ANY")) {
+
+                 workers.getValue()
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+        } catch (DateTimeException e) {
+            notAValidDate();
+        }
+        } catch (NumberFormatException e) {
+            notAValidDate();
+        }
+    }
+
+
+    private void validDate() {
+        datePane.setStyle("-fx-border-width: 3px; -fx-border-color: transparent; ");
+    }
+
+    private void notAValidDate() {
+        datePane.setStyle("-fx-border-width: 3px; "+
+                "-fx-border-color: red;");
+    }
+
+
+    public boolean validateTime( WorkDay workDay, LocalTime time) {
+
+        for (int i = 0; i < workDay.getOrders().size(); i++) {
+            if (time.isAfter( workDay.getOrders().get(i).getStartTime()) ||
+            time.isBefore(workDay.getOrders().get(i).getStartTime().plus( workDay.getOrders().get(i).getDuration().minus(java.time.Duration.ofSeconds(1))))){
+                return  false;
+            }
+        }
+
+        return true;
+    }
+
+    public void updateDateFieldWithSelectedDate() {
+
+        dd.setText( Integer.toString(  currentWorkDay.getDate().getDayOfMonth())  );
+        mm.setText(Integer.toString(currentWorkDay.getDate().getMonthValue()));
+        yy.setText(Integer.toString(currentWorkDay.getDate().getYear()));
+
+
+    }
+
+    public void populateHairdressers() {
+
+        ArrayList<Worker> w = DBController.getAllWorkers();
+
+        workers.getItems().add("ANY");
+
+        assert w != null;
+        for (Worker wor: w ) {
+            workers.getItems().add(wor.getUserName());
+        }
+    }
 
     public void populateAndGetTreatments() {
 
@@ -139,9 +246,10 @@ public class MainPageController {
                 treatments.getItems().add(t.getName());
             }
         }
-
-
     }
+
+
+
 
 
 
@@ -171,6 +279,8 @@ public class MainPageController {
 
         currentWorkDay = getWorkDayFromLabel((selectedLabel));
         updateDailyToDoList();
+
+        updateDateFieldWithSelectedDate();
     }
 
     public void updateDailyToDoList() {
@@ -241,15 +351,14 @@ public class MainPageController {
 
     public void populateCalender(GenerateMonth generateMonth, HBox place) {
 
+        dates.clear();
 
         days  = new VBox[7];
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < days.length; i++) {
             days[i] = (VBox) place.getChildren().get(i);
             days[i].getChildren().clear();
         }
-
-
 
         DayOfWeek day = generateMonth.getStartDay();
 
@@ -259,18 +368,18 @@ public class MainPageController {
 
             int date = generateMonth.getDaysInTotalInLastMonth() - ( daysUntilMonthBeginsInCalender - i );
 
-            insertDate(date , "previus-date", null);
+            insertDate(date , "previus-date", null , place);
 
         }
 
         for (int i = 0; i < generateMonth.getDays().size() ; i++) {
-            insertDate(i + 1 , "regular-date" , generateMonth.getDays().get(i));
+            insertDate(i + 1 , "regular-date" , generateMonth.getDays().get(i) , place);
         }
 
         int daysLeft = 42 - ( daysUntilMonthBeginsInCalender + generateMonth.getDays().size());
 
         for (int i = 1; i <= daysLeft ; i++) {
-            insertDate(i , "next-date" , null);
+            insertDate(i , "next-date" , null, place);
         }
 
 
@@ -279,7 +388,7 @@ public class MainPageController {
 
     }
 
-    public void insertDate(int date , String type , WorkDay workDay) {
+    public void insertDate(int date , String type , WorkDay workDay , HBox place) {
 
         try {
 
@@ -291,14 +400,14 @@ public class MainPageController {
 
             days [index % 7].getChildren().add(label);
 
-            dates.add(label);
+            if (place.getId().equals("h_currentMonth")) {
+                dates.add(label);
+            }
 
             index ++;
 
-
-
-
                 if (index >= 42) index = 0;
+
 
 
 
@@ -473,7 +582,7 @@ public class MainPageController {
 
             popUp = s;
 
-            // this is new
+
 
 
         } catch (IOException e) {
@@ -528,27 +637,9 @@ public class MainPageController {
             block.setToY(blockPlace);
 
 
-
-
-            // if (!creatingOrder && node.getId().equals("_bestilling") ) {
                 transition.play();
                 block.play();
                 transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim() );
-/*            }
-            else {
-
-                block.play();
-                block.onFinishedProperty().set( e -> transition.play());
-                transition.onFinishedProperty().set(e -> afterBackgroundMoveAnim());
-
-
-
-            }*/
-
-
-
-
-
 
         }
     }
