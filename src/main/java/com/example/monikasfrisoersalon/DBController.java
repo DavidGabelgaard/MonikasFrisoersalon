@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class DBController {
@@ -339,7 +340,7 @@ public class DBController {
 
     }
 
-    public static void changeExistingOrder() {
+    public static void changeExistingOrder( int id , Orders orders   ) {
 
         // Don't do this one yet
     }
@@ -360,7 +361,33 @@ public class DBController {
     }
 
 
+    public static ArrayList<Worker> getAllWorkers() {
 
+        String mySQL = "SELECT * FROM  employees.employees";
+
+        try {
+            Statement statement = connection.createStatement();
+
+            ResultSet rs = statement.executeQuery(mySQL);
+
+            ArrayList<Worker> w = new ArrayList<>();
+
+
+            if (rs.next()) {
+                do {
+                    Worker workDay = new Worker(
+                            rs.getString(1),
+                            rs.getString(2)
+                    );
+                    w.add(workDay);
+                } while (rs.next());
+                return w;
+            }
+            } catch(SQLException e){
+                e.printStackTrace();
+            }
+        return  null;
+    }
 
 
 

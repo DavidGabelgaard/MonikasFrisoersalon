@@ -39,7 +39,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="0.5" layoutX="376.0" layoutY="213.0" prefHeight="450.0" prefWidth="550.0" style="-fx-background-color: transparent;" stylesheets="@../../../CSS/ColorPalletCSS.css" vbarPolicy="NEVER">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="0.5" layoutX="376.0" layoutY="200.0" prefHeight="460.0" prefWidth="550.0" style="-fx-background-color: transparent;" stylesheets="@../../../CSS/ColorPalletCSS.css" vbarPolicy="NEVER">
          <content>
             <Pane prefHeight="450.0" prefWidth="1650.0">
                <children>
@@ -119,7 +119,7 @@
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                  </padding>
                               </VBox>
-                              <VBox fx:id="SUN1" layoutX="385.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                              <VBox fx:id="TUE11" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                  </padding>
@@ -132,11 +132,6 @@
                         <HBox fx:id="h_NextMonth" alignment="TOP_CENTER" prefHeight="450.0" prefWidth="550.0">
                            <children>
                               <VBox fx:id="MON11" prefHeight="439.0" prefWidth="78.5" spacing="30.0">
-                                 <padding>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                 </padding>
-                              </VBox>
-                              <VBox fx:id="TUE11" layoutX="10.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                  </padding>
@@ -162,6 +157,11 @@
                                  </padding>
                               </VBox>
                               <VBox fx:id="SUN11" layoutX="385.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="SUN111" layoutX="443.0" layoutY="10.0" prefHeight="393.0" prefWidth="78.5" spacing="30.0">
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                  </padding>
@@ -341,46 +341,226 @@
             </AnchorPane>
             <AnchorPane fx:id="orderPanel" layoutX="9.0" layoutY="220.0" prefHeight="474.0" prefWidth="291.0" style="-fx-background-color: #81B29A; -fx-background-radius: 1em 0 0 1em;">
                <children>
-                  <Text layoutX="26.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frisør">
+                  <AnchorPane fx:id="datePane" layoutX="104.0" layoutY="48.0" prefHeight="30.0" prefWidth="136.0" style="-fx-border-width: 5px;" />
+                  <Text layoutX="26.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frisør">
                      <font>
                         <Font name="Century Gothic" size="18.0" />
                      </font>
                   </Text>
-                  <ComboBox layoutX="105.0" layoutY="22.0" prefWidth="150.0" promptText="ANY" />
-                  <Text layoutX="26.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato" wrappingWidth="49.999999999999886">
+                  <ComboBox fx:id="workers" layoutX="105.0" layoutY="11.0" onAction="#updateTables" prefWidth="150.0" promptText="ANY" />
+                  <Text layoutX="26.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato" wrappingWidth="49.999999999999886">
                      <font>
                         <Font name="Century Gothic" size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="134.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="18.0">
+                  <Text layoutX="134.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="18.0">
                      <font>
                         <Font name="Century Gothic" size="18.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="105.0" layoutY="59.0" prefHeight="30.0" prefWidth="39.0" promptText="dd" styleClass="date-field" stylesheets="@../../../CSS/ColorPalletCSS.css" />
-                  <TextField layoutX="144.0" layoutY="59.0" prefHeight="30.0" prefWidth="42.0" promptText="mm" styleClass="date-field" stylesheets="@../../../CSS/ColorPalletCSS.css" />
-                  <Text layoutX="177.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="18.0">
+                  <TextField fx:id="dd" layoutX="105.0" layoutY="48.0" prefHeight="30.0" prefWidth="39.0" promptText="dd" styleClass="date-field" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+                  <TextField fx:id="mm" layoutX="144.0" layoutY="48.0" prefHeight="30.0" prefWidth="42.0" promptText="mm" styleClass="date-field" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+                  <Text layoutX="177.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="18.0">
                      <font>
                         <Font name="Century Gothic" size="18.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="192.0" layoutY="58.0" prefHeight="25.0" prefWidth="61.0" promptText="yyyy" styleClass="date-field" stylesheets="@../../../CSS/ColorPalletCSS.css" />
-                  <Text layoutX="20.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KlipningsType:" wrappingWidth="150.0">
+                  <TextField fx:id="yy" layoutX="192.0" layoutY="47.0" prefHeight="25.0" prefWidth="61.0" promptText="yyyy" styleClass="date-field" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+                  <Text layoutX="20.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KlipningsType:" wrappingWidth="150.0">
                      <font>
                         <Font name="Century Gothic" size="14.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="20.0" layoutY="95.0" prefHeight="30.0" prefWidth="228.0" promptText="Navn - Efternavn" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
+                  <TextField layoutX="20.0" layoutY="84.0" prefHeight="30.0" prefWidth="228.0" promptText="Navn - Efternavn" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </TextField>
-                  <TextField alignment="BASELINE_LEFT" layoutX="20.0" layoutY="130.0" prefHeight="30.0" prefWidth="228.0" promptText="Tlf. nr" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
+                  <TextField alignment="BASELINE_LEFT" layoutX="20.0" layoutY="119.0" prefHeight="30.0" prefWidth="228.0" promptText="Tlf. nr" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </TextField>
-                  <ComboBox fx:id="treatments" layoutX="14.0" layoutY="193.0" prefHeight="30.0" prefWidth="193.0" promptText="Dameklip" stylesheets="@../../../CSS/ColorPalletCSS.css" visibleRowCount="8" />
+                  <ComboBox fx:id="treatments" layoutX="14.0" layoutY="182.0" prefHeight="30.0" prefWidth="193.0" promptText="Dameklip" stylesheets="@../../../CSS/ColorPalletCSS.css" visibleRowCount="8" />
+                  <ScrollPane hbarPolicy="NEVER" layoutX="15.0" layoutY="225.0" prefHeight="521.0" prefWidth="266.0" vbarPolicy="NEVER">
+                     <content>
+                        <VBox prefHeight="500.0" prefWidth="266.0">
+                           <children>
+                              <AnchorPane prefHeight="40.0" prefWidth="266.0">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <FontAwesomeIconView glyphName="ARROW_DOWN" layoutX="224.0" layoutY="21.0" size="16" />
+                                    <Text layoutX="23.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Morgen" wrappingWidth="92.1669921875">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                              <HBox fx:id="m_Table" prefWidth="266.0">
+                                 <children>
+                                    <VBox prefHeight="161.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="161.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="77.0" layoutY="10.0" prefHeight="161.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="144.0" layoutY="10.0" prefHeight="161.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <AnchorPane layoutX="10.0" layoutY="20.0" prefHeight="40.0" prefWidth="266.0">
+                                 <children>
+                                    <FontAwesomeIconView glyphName="ARROW_DOWN" layoutX="224.0" layoutY="21.0" size="16" />
+                                    <Text layoutX="28.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Middag" wrappingWidth="92.1669921875">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                              <HBox fx:id="mid_Table" layoutX="10.0" layoutY="60.0" prefHeight="149.0" prefWidth="266.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="77.0" layoutY="10.0" prefHeight="200.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="144.0" layoutY="10.0" prefHeight="200.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <AnchorPane layoutX="10.0" layoutY="60.0" prefHeight="40.0" prefWidth="266.0">
+                                 <children>
+                                    <FontAwesomeIconView glyphName="ARROW_DOWN" layoutX="224.0" layoutY="21.0" size="16" text="" />
+                                    <Text layoutX="24.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eftermiddag" wrappingWidth="123.25022977941165">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                              <HBox fx:id="e_Table" layoutX="10.0" layoutY="259.0" prefHeight="149.0" prefWidth="266.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="77.0" layoutY="10.0" prefHeight="200.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="144.0" layoutY="10.0" prefHeight="200.0" prefWidth="66.5" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="15.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                          <Label alignment="CENTER" layoutX="18.0" layoutY="60.0" prefHeight="40.0" prefWidth="50.0" text="Label" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="8.25" right="8.25" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
             <AnchorPane layoutY="50.0" prefHeight="168.0" prefWidth="300.0" style="-fx-background-color: #81B29A;" />
