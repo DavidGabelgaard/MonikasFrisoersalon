@@ -1,0 +1,40 @@
+.scroll-pane .viewport  {
+    -fx-background-color: #76a98f;
+}
+
+
+
+.anchor-pane :hover {
+    -fx-background-color: red;
+}
+
+
+.style .style:hover {
+    -fx-background-color: #6a9a81;
+}
+
+.label {
+
+    -fx-background-color: #618f77;
+    -fx-background-radius: 3px;
+    -fx-border-width: 3px;
+    -fx-border-radius: 3px;
+    -fx-border-color: #436453;
+}
+.label:hover {
+
+    -fx-background-color: #436453;
+    -fx-border-color: #2b4139;
+}
+
+
+.button {
+    -fx-background-color: #436453;
+}
+
+
+
+
+.button:pressed {
+    -fx-background-color: #31493d;
+}

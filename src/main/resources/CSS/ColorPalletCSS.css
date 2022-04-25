@@ -245,6 +245,14 @@
     -fx-padding :0.0 0.15em;
 }
 
+.time-Box {
+    -fx-background-color: #538579FF;
+}
+
+.time-scrool-pane {
+    -fx-background-color: #32564c;
+}
+
 
 
 

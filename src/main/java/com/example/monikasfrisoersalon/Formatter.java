@@ -2,6 +2,8 @@ package com.example.monikasfrisoersalon;
 
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Formatter {
 
@@ -17,6 +19,14 @@ public class Formatter {
 
 
     }
+
+
+    public static LocalTime stringToLocalTime(String s) {
+         return LocalTime.parse(s , DateTimeFormatter.ofPattern("HH:mm"));
+
+    }
+
+
 
     public static String getMonthFromInt(int month) {
         return switch (month) {
