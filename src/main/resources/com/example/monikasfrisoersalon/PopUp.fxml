@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="popUp" prefHeight="540.0" prefWidth="500.0" style="-fx-background-color: #F4F1DE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.PopupController">
+<AnchorPane fx:id="popUp" prefHeight="540.0" prefWidth="500.0" style="-fx-background-color: #F4F1DE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.PopupController">
    <children>
       <AnchorPane prefHeight="54.0" prefWidth="500.0">
          <children>
@@ -61,9 +61,15 @@
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
-            <ComboBox fx:id="hairdresserCombobox" disable="true" layoutX="314.0" layoutY="1.0" prefWidth="150.0" promptText="Monika" visible="false" visibleRowCount="5" />
-            <TextField fx:id="costumerNameTextField" disable="true" layoutX="240.0" layoutY="30.0" prefHeight="25.0" prefWidth="224.0" visible="false" />
-            <TextField fx:id="phoneNumberTextField" disable="true" layoutX="240.0" layoutY="58.0" prefHeight="25.0" prefWidth="224.0" visible="false" />
+            <ComboBox fx:id="hairdresserCombobox" disable="true" layoutX="314.0" layoutY="-3.0" prefHeight="0.0" prefWidth="150.0" promptText="Monika" stylesheets="@../../../CSS/ColorPalletCSS.css" visible="false" visibleRowCount="5" />
+            <TextField fx:id="costumerNameTextField" disable="true" layoutX="240.0" layoutY="26.0" prefHeight="33.0" prefWidth="224.0" style="-fx-alignment: center-right;" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font></TextField>
+            <TextField fx:id="phoneNumberTextField" disable="true" layoutX="240.0" layoutY="54.0" prefHeight="33.0" prefWidth="224.0" style="-fx-alignment: center-right;" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font></TextField>
          </children>
       </AnchorPane>
       <Text fill="#3d405b" layoutX="21.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestilling:" wrappingWidth="224.0">

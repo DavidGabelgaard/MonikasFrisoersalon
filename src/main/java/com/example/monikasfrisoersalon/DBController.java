@@ -14,7 +14,7 @@ public class DBController {
     private static Connection connection;
 
     public static int  connectToDatabase(java.lang.String username , java.lang.String password ) {
-        java.lang.String url = "jdbc:mysql://7.tcp.eu.ngrok.io:10513";
+        java.lang.String url = "jdbc:mysql://5.tcp.eu.ngrok.io:18932";
             try {
                 connection = DriverManager.getConnection(url, username.toLowerCase(), password);
             } catch (SQLException e) {
