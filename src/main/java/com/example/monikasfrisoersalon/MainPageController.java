@@ -170,7 +170,7 @@ public class MainPageController {
 
             if (!workers.getValue().equals("ANY")) {
 
-                 workers.getValue()
+                 //workers.getValue()
 
 
 
@@ -590,6 +590,22 @@ public class MainPageController {
         }
 
 
+    }
+
+    public void historyPress() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("History.fxml"));
+            Scene scene = new Scene(fxmlLoader.load() , 798 , 540);
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void closePopUp() {

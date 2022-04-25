@@ -16,6 +16,7 @@ public class Orders {
     private String bookingName;
     private String bookingPhoneNumber;
     private String bookingEmail;
+    private int bookingID;
 
     public Orders(LocalTime startTime, Duration duration, ArrayList<Treatments> treatments, Worker worker) {
         this.startTime = startTime;
@@ -33,6 +34,18 @@ public class Orders {
         this.bookingName = bookingName;
         this.bookingPhoneNumber = bookingPhoneNumber;
         this.bookingEmail = bookingEmail;
+    }
+
+    public Orders(ArrayList<Treatments> treatments, LocalDate date, String bookingName, String bookingPhoneNumber, int bookingID) {
+        this.treatments = treatments;
+        this.date = date;
+        this.bookingName = bookingName;
+        this.bookingPhoneNumber = bookingPhoneNumber;
+        this.bookingID = bookingID;
+    }
+
+    public int getBookingID() {
+        return bookingID;
     }
 
     @Override
