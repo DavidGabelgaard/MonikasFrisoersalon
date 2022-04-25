@@ -41,8 +41,6 @@ public class StartApplication extends Application {
 
             scene.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
 
-                System.out.println("press");
-
                 MainPageController mainPageController = currentFXMLLoader.getController();
 
                 mainPageController.closePopUp();

@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 
 public class DBController {
@@ -94,10 +95,15 @@ public class DBController {
 
     public static WorkDay getWorkDayForSignedInUserWithDate(LocalDate date) {
 
+       return getWorkDayFromUserWithDate(date , Formatter.formatUserName(getActiveUser()));
+    }
+
+
+    public static WorkDay getWorkDayFromUserWithDate(LocalDate date , String activeUser) {
+
+        activeUser = activeUser.toLowerCase(Locale.ROOT);
+
         WorkDay workDay = getOpeningHoursWithDate(date);
-
-        String activeUser = Formatter.formatUserName(getActiveUser());
-
 
         String mySQL = " SELECT * FROM skema." + activeUser + " Where currentDate = '" + date + "'" ;
 
@@ -134,7 +140,7 @@ public class DBController {
 
                     ArrayList<Treatments> treatments = new ArrayList<>();
                     for (String s : temp ) {
-                       int i =  Integer.parseInt(s);
+                        int i =  Integer.parseInt(s);
                         Treatments t = getTreatments(i);
                         treatments.add(t);
                     }
@@ -142,10 +148,10 @@ public class DBController {
 
 
                     Orders orders = new Orders(
-                        resultSet.getTime(3).toLocalTime(),
-                        Duration.ofSeconds(resultSet.getTime(4).toLocalTime().toSecondOfDay()),
-                        treatments,
-                        getActiveWorker()
+                            resultSet.getTime(3).toLocalTime(),
+                            Duration.ofSeconds(resultSet.getTime(4).toLocalTime().toSecondOfDay()),
+                            treatments,
+                            getActiveWorker()
                     );
 
                     if (workDay != null) {
@@ -160,6 +166,9 @@ public class DBController {
         }
         return workDay;
     }
+
+
+
 
     public static  void createShift(Worker worker , LocalDate date , LocalTime startTime , LocalTime endTime) {
 
@@ -324,9 +333,25 @@ public class DBController {
     }
 
     public static void createOrder(Orders orders) {
-        String mySQL = "INSERT INTO orders." + orders.getWorker().getUserName() + "(orderDate, orderTime, orderDuration, bookingName, bookingPhoneNumber, bookingEmail, treatments)" +
-                "VALUES ('" + orders.getDate() + "','" + orders.getStartTime() + "','" + orders.getDuration() + "','" + orders.getBookingName() + "','" + orders.getBookingPhoneNumber() + "','" + orders.getBookingEmail() +
-                orders.getTreatments() + "')";
+
+        LocalTime d = LocalTime.of(0 , 0).plus(orders.getDuration());
+
+
+        System.out.println(orders.getDate());
+
+        System.out.println(orders.getStartTime());
+
+        System.out.println(d);
+
+        System.out.println(orders.getBookingName());
+
+
+
+        String mySQL = "INSERT INTO orders." + orders.getWorker().getUserName().toLowerCase(Locale.ROOT) + "(orderDate, orderTime, orderDuration, bookingName, bookingPhoneNumber, bookingEmail, treatments)" +
+                "VALUES ('" + orders.getDate() + "','" + orders.getStartTime() + "','" + d + "','" + orders.getBookingName() + "','" + orders.getBookingPhoneNumber() + "','" + orders.getBookingEmail() +
+                "','" +  orders.getTreatments().get(0).getId() + "') ";
+
+        System.out.println(mySQL);
 
         try {
             Statement statement = connection.createStatement();
