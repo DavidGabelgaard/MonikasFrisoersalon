@@ -258,7 +258,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Text fill="WHITE" layoutX="59.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="162.25022977941177">
+                  <Text fill="WHITE" layoutX="56.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="211.99999999999994">
                      <font>
                         <Font name="Century Gothic" size="24.0" />
                      </font>
@@ -281,7 +281,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Text fill="WHITE" layoutX="59.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="162.25022977941177">
+                  <Text fill="WHITE" layoutX="56.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="212.0">
                      <font>
                         <Font name="Century Gothic" size="24.0" />
                      </font>
@@ -304,7 +304,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Text fill="WHITE" layoutX="59.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="162.25022977941177">
+                  <Text fill="WHITE" layoutX="56.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="212.0">
                      <font>
                         <Font name="Century Gothic" size="24.0" />
                      </font>
@@ -327,7 +327,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Text fill="WHITE" layoutX="59.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="162.25022977941177">
+                  <Text fill="WHITE" layoutX="56.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male Cut" wrappingWidth="212.0">
                      <font>
                         <Font name="Century Gothic" size="24.0" />
                      </font>
@@ -340,7 +340,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane fx:id="orderPanel" layoutX="9.0" layoutY="226.0" prefHeight="474.0" prefWidth="291.0" style="-fx-background-color: #81B29A; -fx-background-radius: 1em 0 0 1em;">
+            <AnchorPane fx:id="orderPanel" layoutX="9.0" layoutY="-249.0" prefHeight="474.0" prefWidth="291.0" style="-fx-background-color: #81B29A; -fx-background-radius: 1em 0 0 1em;">
                <children>
                   <AnchorPane fx:id="datePane" layoutX="104.0" layoutY="48.0" prefHeight="30.0" prefWidth="136.0" />
                   <Text layoutX="26.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frisør">
@@ -374,12 +374,12 @@
                   </Text>
                   <TextField fx:id="clientName" layoutX="20.0" layoutY="84.0" prefHeight="30.0" prefWidth="228.0" promptText="Navn - Efternavn" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Century Gothic" size="18.0" />
                      </font>
                   </TextField>
                   <TextField fx:id="clientNumber" alignment="BASELINE_LEFT" layoutX="20.0" layoutY="119.0" prefHeight="30.0" prefWidth="228.0" promptText="Tlf. nr" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Century Gothic" size="18.0" />
                      </font>
                   </TextField>
                   <ComboBox fx:id="treatments" layoutX="14.0" layoutY="182.0" onAction="#updateTreatmentComboBox" prefHeight="30.0" prefWidth="193.0" promptText="Dameklip" stylesheets="@../../../CSS/ColorPalletCSS.css" visibleRowCount="8" />
@@ -486,6 +486,15 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <AnchorPane fx:id="datePane1" layoutX="15.0" layoutY="357.0" prefHeight="49.0" prefWidth="266.0">
+                     <children>
+                        <Label fx:id="orderCreated" alignment="CENTER" opacity="0.0" prefHeight="50.0" prefWidth="266.0" style="-fx-background-color: green; -fx-background-radius: 5px;" text="Bestilling oprettet" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
             <AnchorPane layoutY="50.0" prefHeight="168.0" prefWidth="300.0" style="-fx-background-color: #81B29A;" />

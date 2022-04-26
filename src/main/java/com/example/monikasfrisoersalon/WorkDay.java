@@ -3,6 +3,9 @@ package com.example.monikasfrisoersalon;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class WorkDay {
 
@@ -56,4 +59,12 @@ public class WorkDay {
     public ArrayList<ShiftTime> getShiftTimes() {
         return shiftTimes;
     }
+
+    public void sortOrders() {
+        Collections.sort(this.orders);
+    }
+
+
 }
+
+
