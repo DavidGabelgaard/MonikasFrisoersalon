@@ -1,5 +1,6 @@
 package com.example.monikasfrisoersalon;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,20 +19,24 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
+
+import java.text.Normalizer;
+import java.time.Duration;
+
+
+
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 
 public class MainPageController {
+
 
 
     private Label selectedLabel;
@@ -114,12 +119,6 @@ public class MainPageController {
         g_NextMonth = new GenerateMonth(LocalDate.now().getYear() , LocalDate.now().getMonthValue() + 1);
         g_currentMonth = new GenerateMonth(LocalDate.now().getYear() , LocalDate.now().getMonthValue());
 
-        for (WorkDay l: g_currentMonth.getDays() ) {
-            System.out.println(l);
-        }
-
-
-
         populateCalender(g_previousMonth , h_lastMonth);
         populateCalender(  g_NextMonth, h_NextMonth);
         populateCalender(g_currentMonth, h_currentMonth);
@@ -143,20 +142,183 @@ public class MainPageController {
 
     //region Booking
 
-    public HBox m_Table;
-    public HBox mid_Table;
+    public HBox f_Table;
     public HBox e_Table;
 
     public ComboBox workers;
 
     public AnchorPane datePane;
 
+    public LocalTime selectTime;
+    public Label selectedLabelTime;
+    public LocalDate date;
+
     public TextField dd;
     public TextField mm;
     public TextField yy;
 
+    public TextField clientName;
+    public TextField clientNumber;
+
+    public Text treatmentTime;
+    public Text treatmentPrice;
+
+    public AnchorPane earlyDay;
+    public AnchorPane laterday;
+
+    public ArrayList<LocalTime> f_Time = new ArrayList<>();
+    public ArrayList<LocalTime> e_Time = new ArrayList<>();
+
+    private boolean f_DayOpen = false;
+    private boolean e_DayOpen = false;
+
+    private boolean f_DayDisable = false;
+    private boolean e_dayDisable = false;
+
+    @FXML
+    public void choseDisplayTime(MouseEvent event) {
+
+        Node n = (Node) event.getSource();
+        HBox container;
+        boolean isOpen;
+
+        ArrayList<LocalTime> times;
+
+        if (n.getId().equals("earlyDay")) {
+
+            if (!f_DayDisable) {
+                container = f_Table;
+                isOpen = f_DayOpen;
+                f_DayOpen = !f_DayOpen;
+                times = f_Time;
+
+                displayTime(n , isOpen , times , container);
+            }
+        } else {
+            if (!e_dayDisable) {
+                container = e_Table;
+                isOpen = e_DayOpen;
+                e_DayOpen = !e_DayOpen;
+                times = e_Time;
+
+                displayTime(n , isOpen , times , container);
+            }
+        }
+
+
+    }
+
+    public void displayTime(Node n , boolean isOpen , ArrayList<LocalTime> times , HBox container  ) {
+        AnchorPane a = (AnchorPane) n;
+
+        FontAwesomeIconView fontAwesomeIconView = (FontAwesomeIconView) a.getChildren().get(1);
+
+
+        if (!isOpen ) {
+            // Open it
+
+            fontAwesomeIconView.setGlyphName("ARROW_DOWN");
+
+            System.out.println(times);
+
+            UpdateTimesDisplayed(container , times);
+
+
+        } else {
+            //close it
+            fontAwesomeIconView.setGlyphName("ARROW_UP");
+
+
+            UpdateTimesDisplayed(container , new ArrayList<>() );
+
+        }
+
+        isOpen = !isOpen;
+
+    }
+
+    public void UpdateTimesDisplayed(HBox container , ArrayList<LocalTime> times) {
+
+        VBox[] vBoxes =   { (VBox)container.getChildren().get(0) , (VBox)container.getChildren().get(1) , (VBox)container.getChildren().get(2) ,(VBox) container.getChildren().get(3) };
+
+
+
+        int desiredSize;
+
+        if (times.size() % 4 == 0) {
+           desiredSize = (times.size() / 4 ) * 65;
+        } else {
+            desiredSize = ((times.size() / 4) + 1) * 65;
+        }
+
+        for (int i = 0; i < vBoxes.length; i++) {
+
+
+
+            Timeline timeline = new Timeline();
+
+            timeline.getKeyFrames().add(new KeyFrame(
+                    javafx.util.Duration.seconds(0.25f) , new KeyValue(vBoxes[i].prefHeightProperty() , desiredSize)
+            ));
+
+            timeline.play();
+
+            vBoxes[i].getChildren().clear();
+
+            if (i == vBoxes.length - 1 ) {
+
+            timeline.onFinishedProperty().set(e -> {
+
+                for (int j = 0; j < times.size(); j++) {
+
+
+
+                    try {
+                        Label label = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Booking_time.fxml")));
+
+                        label.setText(times.get(j).toString());
+
+                        int index = (j % 4);
+
+                        vBoxes[index].getChildren().add(label);
+
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
+
+            }
+            );
+            }
+
+        }
+
+    }
+
+
+    @FXML
+    public void updateTreatmentComboBox() {
+        updateTables();
+        Treatments t =  allTreatments.get( getTreatmentIndexFromName( treatments.getValue().toString() ));
+        treatmentTime.setText("Tid: " +  t.getTime().toString());
+        treatmentPrice.setText("Pris: " +  t.getPrice() + "kr." );
+
+    }
+
+
+
     @FXML
     public void updateTables() {
+
+        selectTime = null;
+
+        if (f_Time != null)
+        f_Time.clear();
+
+        if (e_Time != null)
+        e_Time.clear();
 
         try {
             int d = Integer.parseInt(dd.getText());
@@ -164,24 +326,81 @@ public class MainPageController {
             int y = Integer.parseInt(yy.getText());
         try {
 
-            LocalDate localDate = LocalDate.of(y, m, d);
+            LocalDate date = LocalDate.of(y, m, d);
 
             validDate();
 
-            if (!workers.getValue().equals("ANY")) {
+            String value;
 
-                 //workers.getValue()
+            if (workers.getValue() != null) {
+                value = workers.getValue().toString();
+            } else {
+                value = workers.getPromptText().toString();
+            }
+
+            if (!value.equals("ANY")) {
+
+                WorkDay workDay = DBController.getWorkDayFromUserWithDate(date, workers.getValue().toString());
+
+                for (ShiftTime shiftTime : workDay.getShiftTimes()) {
+
+                    LocalTime time = shiftTime.getStartTime();
+
+                    String treatmentString;
+
+                    if (treatments.getValue() == null) {
+                        treatmentString = treatments.getPromptText();
+                    } else {
+                        treatmentString = treatments.getValue().toString();
+                    }
 
 
+                    Duration treatmentDuration = Duration.between(LocalTime.of(0, 0),
+                            allTreatments.get(getTreatmentIndexFromName(treatmentString)).getTime());
+
+
+
+                    while (time.isBefore(shiftTime.getEndTime()) || time == shiftTime.getEndTime()) {
+
+                        if (validateTimeForOneWorker(workDay, time, treatmentDuration)) {
+
+                            insertDateChoicesToArrayList(time);
+
+                        }
+
+                        time = time.plusMinutes(30);
+
+                    }
 
             }
 
+        }
+
+            if (f_Time.size() == 0) {
+                disableTheBoxDueToNoTimesAvailable(earlyDay , f_DayOpen , f_Time , f_Table);
+                f_DayDisable = true;
+                f_DayOpen = false;
+            } else if (f_DayDisable){
+                reEnableTheBoxDueToNowThereBeingOptions(earlyDay);
+                f_DayDisable = false;
+            }
+
+            if (e_Time.size() == 0) {
+                disableTheBoxDueToNoTimesAvailable(laterday , e_DayOpen , e_Time , e_Table);
+                e_dayDisable = true;
+                e_DayOpen = false;
+            } else if (e_dayDisable){
+                reEnableTheBoxDueToNowThereBeingOptions(laterday);
+                e_dayDisable = false;
+            }
 
 
+            if (f_DayOpen)
+                UpdateTimesDisplayed(f_Table , f_Time);
 
 
-
-
+            if (e_DayOpen)
+                UpdateTimesDisplayed(e_Table , e_Time);
 
 
 
@@ -194,6 +413,31 @@ public class MainPageController {
         }
     }
 
+    public void reEnableTheBoxDueToNowThereBeingOptions(AnchorPane place) {
+        Text text = (Text) place.getChildren().get(0);
+        text.setFill(Paint.valueOf("0x000000ff"));
+    }
+
+    public void disableTheBoxDueToNoTimesAvailable (AnchorPane place , boolean panelOpen , ArrayList<LocalTime> time , HBox table   ) {
+
+        if (panelOpen) {
+            displayTime((Node) place , true , time , table );
+        }
+        Text text = (Text) place.getChildren().get(0);
+        text.setFill(Paint.valueOf("0x3c3c3cff"));
+    }
+
+    public void insertDateChoicesToArrayList(LocalTime time){
+
+        if (time.isBefore(LocalTime.of(12 , 0))) {
+            f_Time.add(time);
+        } else {
+            e_Time.add(time);
+        }
+    }
+
+
+
 
     private void validDate() {
         datePane.setStyle("-fx-border-width: 3px; -fx-border-color: transparent; ");
@@ -204,15 +448,74 @@ public class MainPageController {
                 "-fx-border-color: red;");
     }
 
+    public void selectTime(Label time) {
 
-    public boolean validateTime( WorkDay workDay, LocalTime time) {
+        if (selectedLabelTime != null) {
+            selectedLabelTime.setStyle("");
+        }
 
-        for (int i = 0; i < workDay.getOrders().size(); i++) {
-            if (time.isAfter( workDay.getOrders().get(i).getStartTime()) ||
-            time.isBefore(workDay.getOrders().get(i).getStartTime().plus( workDay.getOrders().get(i).getDuration().minus(java.time.Duration.ofSeconds(1))))){
+        selectedLabelTime = time;
+
+        selectedLabelTime.setStyle("-fx-border-width: 5px; -fx-border-color: #ffffff");
+
+
+        String stringTime =  time.getText();
+
+        LocalTime localTime = Formatter.stringToLocalTime(stringTime);
+
+        selectTime = localTime;
+
+    }
+
+
+
+    public boolean validateTimeForOneWorker( WorkDay workDay, LocalTime time , java.time.Duration treatmentDuration )  {
+        LocalTime endTime = time.plus(treatmentDuration);
+
+        for (int i = 0; i < workDay.getShiftTimes().size(); i++) {
+
+            if (endTime.isAfter(workDay.getShiftTimes().get(i).getEndTime())) {
                 return  false;
             }
+
         }
+
+
+
+            for (int i = 0; i < workDay.getOrders().size(); i++) {
+
+
+                if (time == workDay.getOrders().get(i).getStartTime()) {
+                    return false;
+                }
+
+                if (time.isAfter(workDay.getOrders().get(i).getStartTime()) && time.isBefore(workDay.getOrders().get(i).getStartTime().plus(workDay.getOrders().get(i).getDuration()))) {
+                    return false;
+                }
+
+
+
+
+                if (endTime.isAfter(workDay.getOrders().get(i).getStartTime()) && endTime.isBefore(workDay.getOrders().get(i).getStartTime().plus(workDay.getOrders().get(i).getDuration()))) {
+                    return false;
+                }
+
+                if (time.isBefore(workDay.getOrders().get(i).getStartTime())) {
+                    if (endTime.isAfter(workDay.getOrders().get(i).getStartTime().plus(workDay.getOrders().get(i).getDuration()))) {
+                        return false;
+                    }
+                    if (endTime == workDay.getOrders().get(i).getStartTime().plus(workDay.getOrders().get(i).getDuration())) {
+                        return false;
+                    }
+
+                }
+
+
+
+
+
+
+            }
 
         return true;
     }
@@ -249,8 +552,134 @@ public class MainPageController {
     }
 
 
+    public int getTreatmentIndexFromName(String name) {
 
 
+
+        for (int i = 1; i < allTreatments.size(); i++) {
+
+
+
+            if ( allTreatments.get(i).getName().equals(name)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    public boolean validateOrder() {
+
+        boolean ret = true;
+
+        if (workers.getValue() == null || workers.getValue().equals("ANY")) {
+            makeNodeRed( workers);
+            ret = false;
+        } else {
+            makeNodeRegular(workers);
+        }
+
+        try {
+
+        int d = Integer.parseInt(dd.getText());
+        int m = Integer.parseInt(mm.getText());
+        int y = Integer.parseInt(yy.getText());
+
+        makeNodeRegular(datePane);
+
+        try {
+
+            date = LocalDate.of(y, m, d);
+
+            validDate();
+
+        } catch (DateTimeException e) {
+            notAValidDate();
+            ret = false;
+        }
+
+        } catch (NumberFormatException e) {
+            makeNodeRed(datePane);
+            ret = false;
+        }
+
+        if (clientName.getText().equals("")) {
+            makeNodeRed(clientName);
+            ret = false;
+        } else {
+            makeNodeRegular(clientName);
+        }
+
+
+        if (clientNumber.getText().equals("")) {
+            makeNodeRed(clientNumber);
+            ret = false;
+        } else {
+            makeNodeRegular(clientNumber);
+        }
+
+        // validate time
+
+
+
+        return  ret;
+    }
+
+    @FXML
+    public void createOrder() {
+        if (validateOrder()) {
+
+            Worker w = new Worker(
+                    workers.getValue().toString(),
+                    null
+            );
+
+            ArrayList<Treatments> t = new ArrayList<>();
+
+            t.add(getTreatmentFromComboBox());
+
+
+        Orders orders = new Orders(
+                selectTime,
+                Duration.between(LocalTime.of(0 , 0),  getTreatmentFromComboBox().getTime()),
+                t,
+                w,
+                date,
+                clientName.getText(),
+                clientNumber.getText(),
+                null
+        );
+
+        DBController.createOrder(orders);
+
+        }
+    }
+
+    public Treatments getTreatmentFromComboBox() {
+
+        if (treatments.getValue() != null) {
+           return  allTreatments.get(   getTreatmentIndexFromName(treatments.getValue().toString()));
+        } else {
+            return allTreatments.get( getTreatmentIndexFromName(treatments.getPromptText()) );
+        }
+
+
+
+    }
+
+
+
+    public void makeNodeRed(Node node) {
+
+        System.out.println("now?");
+
+    node.setStyle("-fx-border-width: 3px;" + "-fx-border-color: red; ");
+
+    }
+
+    public void makeNodeRegular(Node node) {
+        node.setStyle("");
+    }
 
 
 
@@ -281,6 +710,10 @@ public class MainPageController {
         updateDailyToDoList();
 
         updateDateFieldWithSelectedDate();
+
+        if (creatingOrder) {
+            updateTables();
+        }
     }
 
     public void updateDailyToDoList() {
@@ -427,9 +860,9 @@ public class MainPageController {
             deactivateButtons();
 
             Animation animation = new Timeline(
-                    new KeyFrame(Duration.seconds(0.5f),
+                    new KeyFrame(javafx.util.Duration.seconds(0.5f),
                             new KeyValue(scrollPane.hvalueProperty(), scrollPane.getHvalue() - 0.5d)),
-                    new KeyFrame(Duration.seconds(0.1d)));
+                    new KeyFrame(javafx.util.Duration.seconds(0.1d)));
             animation.play();
             animation.setOnFinished(e -> lastMonthAnimFinished());
 
@@ -482,7 +915,7 @@ public class MainPageController {
             deactivateButtons();
 
             Animation animation = new Timeline(
-                    new KeyFrame(Duration.seconds(0.5f),
+                    new KeyFrame(javafx.util.Duration.seconds( 0.5f  ),
                             new KeyValue(scrollPane.hvalueProperty(), scrollPane.getHvalue() + 0.5d)));
             animation.play();
             animation.setOnFinished(e -> nextMonthAnimFinished() );
@@ -639,7 +1072,7 @@ public class MainPageController {
         }
             TranslateTransition transition = new TranslateTransition();
 
-            transition.setDuration(Duration.seconds(0.3f));
+            transition.setDuration(javafx.util.Duration.seconds(0.3f));
             transition.setNode(background_SeeAndBook);
             transition.setAutoReverse(false);
 
@@ -647,7 +1080,7 @@ public class MainPageController {
 
             TranslateTransition block = new TranslateTransition();
 
-            block.setDuration(Duration.seconds(0.5f));
+            block.setDuration(javafx.util.Duration.seconds(0.5f));
             block.setNode(orderPanel);
             block.setAutoReverse(false);
             block.setToY(blockPlace);
@@ -661,14 +1094,10 @@ public class MainPageController {
     }
 
         private void afterBackgroundMoveAnim() {
-
             canChange = true;
-
             creatingOrder = !creatingOrder;
 
         }
-
-
 
 
     public boolean nextMonthAvailable = true;
