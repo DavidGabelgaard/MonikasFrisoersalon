@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.monikasfrisoersalon.History"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="history" prefHeight="540.0" prefWidth="798.0" style="-fx-background-color: #F4F1DE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monikasfrisoersalon.HistoryController">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="798.0" style="-fx-background-color: #ccb7e5;">
+         <children>
+            <Text fill="#3d405b" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordresøgning" textAlignment="CENTER" wrappingWidth="191.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <Label layoutX="748.0" onMouseClicked="#close" prefHeight="50.0" prefWidth="50.0" styleClass="close-btn" stylesheets="@../../../CSS/ColorPalletCSS.css">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" selectionStart="1" size="30" translateX="7.0" wrappingWidth="24.0" />
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Text fill="#3d405b" layoutX="14.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer din søgning" wrappingWidth="357.0">
+         <font>
+            <Font name="Century Gothic Bold" size="36.0" />
+         </font>
+      </Text>
+      <Button layoutX="640.0" layoutY="203.0" mnemonicParsing="false" onAction="#search" prefHeight="46.0" prefWidth="84.0" style="-fx-background-color: #72cc50;" styleClass="Button" stylesheets="@../../../CSS/ColorPalletCSS.css" text="Søg" />
+      <AnchorPane layoutX="15.0" layoutY="115.0" prefHeight="10.0" prefWidth="215.0">
+         <children>
+            <Text fill="#3d405b" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestillings ID" wrappingWidth="143.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="bestillingsID" layoutY="34.0" prefHeight="33.0" prefWidth="215.0" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="269.0" layoutY="118.0" prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <Text fill="#3d405b" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn" wrappingWidth="170.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="navn" layoutY="28.0" prefHeight="33.0" prefWidth="215.0" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="564.0" layoutY="118.0" prefHeight="9.0" prefWidth="200.0">
+         <children>
+            <Text fill="#3d405b" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer" wrappingWidth="191.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="telefonnummer" layoutY="28.0" prefHeight="33.0" prefWidth="215.0" styleClass="Name-field" stylesheets="@../../../CSS/ColorPalletCSS.css">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="195.0" prefHeight="61.0" prefWidth="215.0">
+         <children>
+            <Text fill="#3d405b" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="103.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="services" layoutY="28.0" prefHeight="25.0" prefWidth="215.0" promptText="Service" stylesheets="@../../../CSS/ColorPalletCSS.css" visibleRowCount="8" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="271.0" layoutY="195.0" prefHeight="62.0" prefWidth="327.0">
+         <children>
+            <Text fill="#3d405b" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato" wrappingWidth="191.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="day" layoutY="28.0" prefHeight="34.0" prefWidth="84.0" promptText="Dag" stylesheets="@../../../CSS/ColorPalletCSS.css" visibleRowCount="8" />
+            <ComboBox fx:id="month" layoutX="96.0" layoutY="28.0" onAction="#updateDay" prefHeight="34.0" prefWidth="133.0" promptText="Måned" stylesheets="@../../../CSS/ColorPalletCSS.css" visibleRowCount="8" />
+            <ComboBox fx:id="year" layoutX="241.0" layoutY="28.0" prefHeight="34.0" prefWidth="90.0" promptText="År" stylesheets="@../../../CSS/ColorPalletCSS.css" visibleRowCount="8" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="564.0" layoutY="58.0" prefHeight="61.0" prefWidth="215.0">
+         <children>
+            <Text fill="#3d405b" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afsluttede ordre" wrappingWidth="191.0">
+               <font>
+                  <Font name="Century Gothic" size="24.0" />
+               </font>
+            </Text>
+            <CheckBox layoutX="201.0" layoutY="17.0" mnemonicParsing="false" prefHeight="4.0" prefWidth="4.0" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="24.0" layoutY="270.0" prefHeight="31.0" prefWidth="750.0" style="-fx-background-color: #D3D3D3;">
+         <children>
+            <AnchorPane prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+               <children>
+                  <Text fill="#3d405b" layoutX="6.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestillings ID" underline="true" wrappingWidth="120.0">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="150.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+               <children>
+                  <Text fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn" underline="true" wrappingWidth="58.0">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="300.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+               <children>
+                  <Text fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon nr." underline="true" wrappingWidth="103.0">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="450.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+               <children>
+                  <Text fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" underline="true" wrappingWidth="84.0">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="600.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+               <children>
+                  <Text fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato" underline="true" wrappingWidth="58.0">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <ScrollPane hbarPolicy="NEVER" layoutX="24.0" layoutY="304.0" prefHeight="185.0" prefWidth="750.0">
+         <content>
+            <VBox fx:id="vbox" prefHeight="0.0" prefWidth="750.0" style="-fx-border-width: 2px; -fx-background-color: white;" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+         </content>
+      </ScrollPane>
+   </children>
 </AnchorPane>
