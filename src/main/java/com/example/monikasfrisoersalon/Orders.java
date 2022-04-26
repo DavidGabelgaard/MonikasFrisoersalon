@@ -11,6 +11,7 @@ public class Orders {
     private LocalTime startTime;
     private Duration duration;
     private ArrayList<Treatments> treatments;
+    private String service;
     private Worker worker;
     private LocalDate date;
     private String bookingName;
@@ -18,11 +19,12 @@ public class Orders {
     private String bookingEmail;
     private int bookingID;
 
-    public Orders(LocalTime startTime, Duration duration, ArrayList<Treatments> treatments, Worker worker) {
+    public Orders(LocalTime startTime, Duration duration, ArrayList<Treatments> treatments, Worker worker, int bookingID) {
         this.startTime = startTime;
         this.duration = duration;
         this.treatments = treatments;
         this.worker = worker;
+        this.bookingID = bookingID;
     }
 
     public Orders(LocalTime startTime, Duration duration, ArrayList<Treatments> treatments, Worker worker, LocalDate date, String bookingName, String bookingPhoneNumber, String bookingEmail) {
@@ -43,6 +45,13 @@ public class Orders {
         this.bookingPhoneNumber = bookingPhoneNumber;
         this.bookingID = bookingID;
     }
+    public Orders(LocalDate date, String bookingName, String bookingPhoneNumber, int bookingID) {
+        this.date = date;
+        this.bookingName = bookingName;
+        this.bookingPhoneNumber = bookingPhoneNumber;
+        this.bookingID = bookingID;
+    }
+
 
     public int getBookingID() {
         return bookingID;
@@ -54,7 +63,13 @@ public class Orders {
                 "startTime=" + startTime +
                 ", duration=" + duration +
                 ", treatments=" + treatments +
-                ", worker='" + worker + '\'' +
+                ", service='" + service + '\'' +
+                ", worker=" + worker +
+                ", date=" + date +
+                ", bookingName='" + bookingName + '\'' +
+                ", bookingPhoneNumber='" + bookingPhoneNumber + '\'' +
+                ", bookingEmail='" + bookingEmail + '\'' +
+                ", bookingID=" + bookingID +
                 '}';
     }
 

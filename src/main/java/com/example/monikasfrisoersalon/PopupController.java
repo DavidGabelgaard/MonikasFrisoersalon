@@ -11,7 +11,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import static java.lang.Integer.parseInt;
 
 public class PopupController {
 
@@ -45,31 +48,14 @@ public class PopupController {
     public boolean vaskActive;
     public boolean brynActive;
     public boolean kurActive;
+    public int index;
+
+    Orders orderinfo;
+    Treatments service;
 
     @FXML
     public void initialize() {
-        activeTreatment = DBController.getTreatments(1);
-        hairdresserCombobox.getItems().setAll("Annika", "Henriette", "Kasper", "Monika", "Susan");
-        hairdresserCombobox.setPromptText(hairdresser.getText());
-        addServices(DBController.getAllTreatments());
-        services.setPromptText(activeTreatment.getName());
-        costumerNameTextField.setText(costumerName.getText());
-        phoneNumberTextField.setText(phoneNumber.getText());
-
-
-
-        totalPrice.setText(price.getText());
-
-        treatment.setText(activeTreatment.getName());
-        time.setText("Tid: " + activeTreatment.getTime());
-        price.setText("Pris: " + activeTreatment.getPrice() + " kr");
-        totalPrice.setText(activeTreatment.getPrice() + " kr");
-        extraPrice = 0;
-        studierabatActive = false;
-        vaskActive = false;
-        brynActive = false;
-        kurActive = false;
-
+        populateController();
     }
 
     @FXML
@@ -102,7 +88,11 @@ public class PopupController {
 
         showAndHideInfo(false, true);
         updatePrice();
-        //DBController.changeExistingOrder();
+        ArrayList<Treatments> list = new ArrayList<>();
+        list.add(activeTreatment);
+        Orders order = new Orders(list, orderinfo.getDate(), costumerName.getText(), phoneNumber.getText(), Integer.parseInt(orderID.getText()));
+
+        DBController.changeExistingOrder(Integer.parseInt(orderID.getText()), order);
     }
 
     @FXML
@@ -113,6 +103,38 @@ public class PopupController {
             time.setText("Tid: " + activeTreatment.getTime());
             price.setText("Pris: " + activeTreatment.getPrice() + " kr");
         }
+    }
+
+    public void populateController() {
+        MainPageController MPC = StartApplication.currentFXMLLoader.getController();
+        int id = MPC.currentWorkDay.getOrders().get(index).getBookingID();
+        orderinfo = DBController.getOrderFromId(id);
+        service = MPC.currentWorkDay.getOrders().get(index).getTreatments().get(0);
+
+        activeTreatment = service;
+        hairdresserCombobox.getItems().setAll("Annika", "Henriette", "Kasper", "Monika", "Susan");
+        hairdresserCombobox.setPromptText(hairdresser.getText());
+        addServices(DBController.getAllTreatments());
+        services.setPromptText(activeTreatment.getName());
+        costumerName.setText(orderinfo.getBookingName());
+        phoneNumber.setText(orderinfo.getBookingPhoneNumber());
+        costumerNameTextField.setText(costumerName.getText());
+        phoneNumberTextField.setText(phoneNumber.getText());
+        orderID.setText(String.valueOf(orderinfo.getBookingID()));
+
+
+        totalPrice.setText(price.getText());
+        treatment.setText(activeTreatment.getName());
+        time.setText("Tid: " + activeTreatment.getTime());
+        price.setText("Pris: " + activeTreatment.getPrice() + " kr");
+        totalPrice.setText(activeTreatment.getPrice() + " kr");
+
+        extraPrice = 0;
+        studierabatActive = false;
+        vaskActive = false;
+        brynActive = false;
+        kurActive = false;
+
     }
 
     public void showAndHideInfo(boolean first, boolean second) {
@@ -225,12 +247,12 @@ public class PopupController {
     }
 
     public void sletPressed() {
-        //DBController.deleteOrder();
+        DBController.deleteOrderFromID(orderinfo.getBookingID());
         closePopUp();
     }
 
     public void afslutPressed() {
-        //DBController.completeOrder();
+        DBController.completeOrderFromID(orderinfo.getBookingID());
         closePopUp();
     }
 

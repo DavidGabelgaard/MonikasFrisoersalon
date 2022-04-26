@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="searchAnchorPane" prefHeight="34.0" prefWidth="750.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="34.0" prefWidth="112.0" style="-fx-border-color: gray;">
+         <children>
+            <Text fx:id="searchBestillingsID" fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestillings ID" wrappingWidth="83.0">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="112.0" prefHeight="34.0" prefWidth="225.0" style="-fx-border-color: gray;">
+         <children>
+            <Text fx:id="searchNavn" fill="#3d405b" layoutX="16.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn" wrappingWidth="193.0">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="337.0" prefHeight="34.0" prefWidth="100.0" style="-fx-border-color: gray;">
+         <children>
+            <Text fx:id="searchTelefonnummer" fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="23269844" wrappingWidth="83.0">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="437.0" prefHeight="34.0" prefWidth="193.0" style="-fx-border-color: gray;">
+         <children>
+            <Text fx:id="searchService" fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Herreklip inkl. skægklip" wrappingWidth="165.0">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="630.0" prefHeight="34.0" prefWidth="119.0" style="-fx-border-color: gray;">
+         <children>
+            <Text fx:id="searchDato" fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2022-12-12" wrappingWidth="83.0">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
