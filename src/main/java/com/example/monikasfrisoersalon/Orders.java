@@ -1,12 +1,13 @@
 package com.example.monikasfrisoersalon;
 
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 
-public class Orders {
+public class Orders implements Comparable <Orders> {
 
     private LocalTime startTime;
     private Duration duration;
@@ -91,5 +92,12 @@ public class Orders {
 
     public void setWorker(Worker worker) {
         this.worker = worker;
+    }
+
+
+
+    @Override
+    public int compareTo(Orders o) {
+        return this.getStartTime().compareTo(o.getStartTime());
     }
 }

@@ -81,9 +81,7 @@ public class MainPageController {
 
 
     public VBox[] days;
-
     public WorkDay currentWorkDay;
-
     public Stage popUp;
 
 
@@ -157,11 +155,13 @@ public class MainPageController {
     public TextField mm;
     public TextField yy;
 
+
     public TextField clientName;
     public TextField clientNumber;
 
     public Text treatmentTime;
     public Text treatmentPrice;
+    public Label orderCreated;
 
     public AnchorPane earlyDay;
     public AnchorPane laterday;
@@ -218,8 +218,6 @@ public class MainPageController {
             // Open it
 
             fontAwesomeIconView.setGlyphName("ARROW_DOWN");
-
-            System.out.println(times);
 
             UpdateTimesDisplayed(container , times);
 
@@ -297,7 +295,6 @@ public class MainPageController {
 
     }
 
-
     @FXML
     public void updateTreatmentComboBox() {
         updateTables();
@@ -306,8 +303,6 @@ public class MainPageController {
         treatmentPrice.setText("Pris: " +  t.getPrice() + "kr." );
 
     }
-
-
 
     @FXML
     public void updateTables() {
@@ -435,9 +430,6 @@ public class MainPageController {
         }
     }
 
-
-
-
     private void validDate() {
         datePane.setStyle("-fx-border-width: 3px; -fx-border-color: transparent; ");
     }
@@ -465,8 +457,6 @@ public class MainPageController {
         selectTime = localTime;
 
     }
-
-
 
     public boolean validateTimeForOneWorker( WorkDay workDay, LocalTime time , java.time.Duration treatmentDuration )  {
         LocalTime endTime = time.plus(treatmentDuration);
@@ -651,7 +641,72 @@ public class MainPageController {
 
         DBController.createOrder(orders);
 
+            clearTextFields();
+
+            insertOrderIntoJava();
+
+            showOrderCreated();
+
         }
+    }
+
+    public void showOrderCreated() {
+        FadeTransition fadeTransition = new FadeTransition();
+
+        fadeTransition.setNode(orderCreated);
+        fadeTransition.setDuration(javafx.util.Duration.seconds(2));
+
+        fadeTransition.setAutoReverse(true);
+
+        fadeTransition.setFromValue(0);
+
+        fadeTransition.setToValue(1);
+
+        fadeTransition.setCycleCount(2);
+
+        fadeTransition.play();
+
+
+
+    }
+
+    public void insertOrderIntoJava() {
+        updateTables();
+
+        if (date.getMonthValue() == g_currentMonth.getMonth()) {
+            g_currentMonth = new GenerateMonth(currentYearDisplayed , currentMonthDisplayed);
+        }
+
+        if (date.getMonthValue() == g_NextMonth.getMonth()) {
+            if (currentMonthDisplayed == 12 ) {
+                g_NextMonth = new GenerateMonth(currentYearDisplayed + 1 , 1);
+            } else {
+                g_NextMonth = new GenerateMonth(currentYearDisplayed , currentMonthDisplayed - 1);
+            }
+        }
+
+        if (date.getMonthValue() == g_previousMonth.getMonth()) {
+
+            if (currentMonthDisplayed == 1 ) {
+                g_previousMonth = new GenerateMonth(currentYearDisplayed - 1 , 12 );
+            } else {
+                g_previousMonth = new GenerateMonth(currentYearDisplayed , currentMonthDisplayed - 1);
+            }
+        }
+
+
+        updateDailyToDoList();
+
+
+    }
+
+    public void clearTextFields() {
+
+        clientName.setText("");
+        clientNumber.setText("");
+
+
+
     }
 
     public Treatments getTreatmentFromComboBox() {
@@ -666,11 +721,8 @@ public class MainPageController {
 
     }
 
-
-
     public void makeNodeRed(Node node) {
 
-        System.out.println("now?");
 
     node.setStyle("-fx-border-width: 3px;" + "-fx-border-color: red; ");
 
@@ -680,10 +732,7 @@ public class MainPageController {
         node.setStyle("");
     }
 
-
-
     //endregion
-
 
 
     //region Calender - Month
@@ -754,9 +803,16 @@ public class MainPageController {
                 tasks) {
             t.setVisible(true);
         }
+            int size;
+        if (currentWorkDay.getOrders().size() > 4 ) {
+            size = 4;
+        } else {
+            size = currentWorkDay.getOrders().size();
+        }
 
+        currentWorkDay.sortOrders();
 
-        for (int i = 0; i < currentWorkDay.getOrders().size() ; i++) {
+            for (int i = 0; i < size ; i++) {
 
             Label time = (Label) tasks[i].getChildren().get(0);
             time.setText(currentWorkDay.getOrders().get(i).getStartTime().toString());
@@ -766,11 +822,16 @@ public class MainPageController {
             if (currentWorkDay.getOrders().get(i).getTreatments().size() > 1) {
                 treatment.setText("Se mere");
             } else {
-                treatment.setText(currentWorkDay.getOrders().get(i).getTreatments().get(0).getName());
+
+                if (currentWorkDay.getOrders().get(i).getTreatments().get(0).getName().length() > 17  ) {
+                    String s = currentWorkDay.getOrders().get(i).getTreatments().get(0).getName();
+                    String[] ss =  s.split(" ");
+                    treatment.setText(ss[0] + " +");
+                } else {
+                    treatment.setText(currentWorkDay.getOrders().get(i).getTreatments().get(0).getName());
+                }
             }
-
         }
-
 
         int amountThatCantBeDisplayed = tasks.length - currentWorkDay.getOrders().size();
 
