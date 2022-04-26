@@ -34,6 +34,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static java.lang.Integer.parseInt;
+
 
 public class MainPageController {
 
@@ -131,7 +133,7 @@ public class MainPageController {
 
     public WorkDay getWorkDayFromLabel(Label date) {
 
-        int _day = Integer.parseInt( date.getText());
+        int _day = parseInt( date.getText());
 
 
         return g_currentMonth.getDays().get(_day -1 );
@@ -316,9 +318,9 @@ public class MainPageController {
         e_Time.clear();
 
         try {
-            int d = Integer.parseInt(dd.getText());
-            int m = Integer.parseInt(mm.getText());
-            int y = Integer.parseInt(yy.getText());
+            int d = parseInt(dd.getText());
+            int m = parseInt(mm.getText());
+            int y = parseInt(yy.getText());
         try {
 
             LocalDate date = LocalDate.of(y, m, d);
@@ -571,9 +573,9 @@ public class MainPageController {
 
         try {
 
-        int d = Integer.parseInt(dd.getText());
-        int m = Integer.parseInt(mm.getText());
-        int y = Integer.parseInt(yy.getText());
+        int d = parseInt(dd.getText());
+        int m = parseInt(mm.getText());
+        int y = parseInt(yy.getText());
 
         makeNodeRegular(datePane);
 
@@ -752,7 +754,7 @@ public class MainPageController {
         selectedLabel = date;
 
         dateAndMonth.setText(date.getText() + ". " + Formatter.getMonthFromInt(currentMonthDisplayed) );
-        TodaysDate.setText( Formatter.getDayFromLocalDate(LocalDate.of(currentYearDisplayed , currentMonthDisplayed , Integer.parseInt(date.getText()))));
+        TodaysDate.setText( Formatter.getDayFromLocalDate(LocalDate.of(currentYearDisplayed , currentMonthDisplayed , parseInt(date.getText()))));
 
 
         currentWorkDay = getWorkDayFromLabel((selectedLabel));
@@ -1061,8 +1063,15 @@ public class MainPageController {
     //endregion
 
     //region PopUp
+    public int popUpIndex;
 
-    public void OrderPress() {
+    @FXML
+    public void OrderPress(MouseEvent event) {
+        Node n = (Node) event.getSource();
+        String string = n.getId();
+        string = string.substring(4,5);
+        int index = parseInt(string) - 1;
+        popUpIndex = index;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("PopUp.fxml"));
             Scene scene = new Scene(fxmlLoader.load() , 500 , 540);

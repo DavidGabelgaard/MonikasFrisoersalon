@@ -104,26 +104,26 @@
       </AnchorPane>
       <AnchorPane layoutX="564.0" layoutY="58.0" prefHeight="61.0" prefWidth="215.0">
          <children>
-            <Text fill="#3d405b" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afsluttede ordre" wrappingWidth="191.0">
+            <Text fill="#3d405b" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afsluttede ordrer" wrappingWidth="201.0">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Text>
-            <CheckBox layoutX="201.0" layoutY="17.0" mnemonicParsing="false" prefHeight="4.0" prefWidth="4.0" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+            <CheckBox layoutX="201.0" layoutY="17.0" mnemonicParsing="false" onAction="#afsluttetCheck" prefHeight="4.0" prefWidth="4.0" stylesheets="@../../../CSS/ColorPalletCSS.css" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="24.0" layoutY="270.0" prefHeight="31.0" prefWidth="750.0" style="-fx-background-color: #D3D3D3;">
          <children>
-            <AnchorPane prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+            <AnchorPane prefHeight="34.0" prefWidth="113.0" style="-fx-border-color: gray;">
                <children>
-                  <Text fill="#3d405b" layoutX="6.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestillings ID" underline="true" wrappingWidth="120.0">
+                  <Text fill="#3d405b" layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordre ID" underline="true" wrappingWidth="84.0">
                      <font>
                         <Font name="Century Gothic" size="20.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="150.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+            <AnchorPane layoutX="113.0" prefHeight="34.0" prefWidth="225.0" style="-fx-border-color: gray;">
                <children>
                   <Text fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn" underline="true" wrappingWidth="58.0">
                      <font>
@@ -132,16 +132,16 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="300.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+            <AnchorPane layoutX="338.0" prefHeight="34.0" prefWidth="100.0" style="-fx-border-color: gray;">
                <children>
-                  <Text fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon nr." underline="true" wrappingWidth="103.0">
+                  <Text fill="#3d405b" layoutX="17.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tlf nr." underline="true" wrappingWidth="67.0">
                      <font>
                         <Font name="Century Gothic" size="20.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="450.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+            <AnchorPane layoutX="438.0" prefHeight="34.0" prefWidth="193.0" style="-fx-border-color: gray;">
                <children>
                   <Text fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" underline="true" wrappingWidth="84.0">
                      <font>
@@ -150,7 +150,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="600.0" prefHeight="34.0" prefWidth="150.0" style="-fx-border-color: gray;">
+            <AnchorPane layoutX="631.0" prefHeight="34.0" prefWidth="120.0" style="-fx-border-color: gray;">
                <children>
                   <Text fill="#3d405b" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato" underline="true" wrappingWidth="58.0">
                      <font>
@@ -161,9 +161,9 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <ScrollPane hbarPolicy="NEVER" layoutX="24.0" layoutY="304.0" prefHeight="185.0" prefWidth="750.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="24.0" layoutY="304.0" prefHeight="185.0" prefWidth="751.0">
          <content>
-            <VBox fx:id="vbox" prefHeight="0.0" prefWidth="750.0" style="-fx-border-width: 2px; -fx-background-color: white;" stylesheets="@../../../CSS/ColorPalletCSS.css" />
+            <VBox fx:id="searchVbox" prefHeight="0.0" prefWidth="750.0" style="-fx-border-width: 2px; -fx-background-color: white;" stylesheets="@../../../CSS/ColorPalletCSS.css" />
          </content>
       </ScrollPane>
    </children>

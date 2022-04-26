@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 
 
@@ -152,7 +151,8 @@ public class DBController {
                             resultSet.getTime(3).toLocalTime(),
                             Duration.ofSeconds(resultSet.getTime(4).toLocalTime().toSecondOfDay()),
                             treatments,
-                            getActiveWorker()
+                            getActiveWorker(),
+                            resultSet.getInt(1)
                     );
 
                     if (workDay != null) {
@@ -317,10 +317,27 @@ public class DBController {
         return list;
     }
 
-    public static Orders getOrderFromIdFromSignedInUser(int id) {
+    public static Orders getOrderFromId(int id) {
+        String mySQL = "SELECT * FROM orders.monika WHERE orderID = '" + id + "'";
 
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(mySQL);
 
+            if (resultSet.next()) {
+                return new Orders(
+                        resultSet.getDate(2).toLocalDate(),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getInt(1)
+                );
+            } else {
+                return null;
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -366,9 +383,20 @@ public class DBController {
 
     }
 
-    public static void changeExistingOrder( int id , Orders orders   ) {
+    public static void changeExistingOrder(int id, Orders order) {
 
-        // Don't do this one yet
+        String mySQL = "UPDATE orders.monika SET bookingName = '" + order.getBookingName() + "', " +
+                "bookingPhoneNumber = '" + order.getBookingPhoneNumber() + "', " +
+                "treatments = '" + order.getTreatments().get(0).getId() + "' WHERE orderID = '" + id + "'";
+
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.execute(mySQL);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void addTreatment (Treatments treatments) {
@@ -416,6 +444,148 @@ public class DBController {
     }
 
 
+    public static void deleteOrderFromID(int ID) {
+        saveOrderToHistory(ID, "Slettet");
+        deleteActiveOrderFromID(ID);
+    }
+
+    public static void completeOrderFromID(int ID) {
+        saveOrderToHistory(ID, "Gennemført");
+        deleteActiveOrderFromID(ID);
+    }
+
+    public static void saveOrderToHistory(int ID, String orderStatus) {
+        String mySQL = "INSERT INTO history.history (orderID, orderDate, orderTime, " +
+                "orderDuration, bookingName, bookingPhoneNumber, " +
+                "bookingEmail, timeStamp, treatments) SELECT orderID, orderDate, orderTime, " +
+                "orderDuration, bookingName, bookingPhoneNumber, " +
+                "bookingEmail, timeStamp, treatments FROM orders.monika WHERE orderID = '" + ID + "'";
+
+        String mySQL2 = "UPDATE history.history SET status = '" + orderStatus + "' WHERE orderID = '" + ID + "'";
+
+
+
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.execute(mySQL);
+            statement.execute(mySQL2);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteActiveOrderFromID(int ID) {
+        String mySQL = "DELETE FROM orders.monika WHERE orderID = '" + ID + "'";
+
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.execute(mySQL);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Orders> searchInHistory(Orders order) {
+        String bookingNameString = "'" + order.getBookingName() + "'";
+        if (order.getBookingName().equals("")) {
+            bookingNameString = "bookingName";
+        }
+
+        String bookingPhoneNumberString = "'" + order.getBookingPhoneNumber() + "'";
+        if (order.getBookingPhoneNumber().equals("")) {
+            bookingPhoneNumberString = "bookingPhoneNumber";
+        }
+
+        String bookingOrderIDString = "'" + order.getBookingID() + "'";
+        if (order.getBookingID() == 0) {
+            bookingOrderIDString = "orderID";
+        }
+
+        String mySQL = "SELECT * FROM history.history WHERE bookingName = " + bookingNameString +
+                " AND bookingPhoneNumber = " + bookingPhoneNumberString +
+                " AND orderID = " + bookingOrderIDString;
+
+        try {
+
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(mySQL);
+            ArrayList<Orders> list = new ArrayList<>();
+
+
+            if (rs.next()) {
+                do {
+                    ArrayList<Treatments> list2 = new ArrayList<>();
+                    list2.add(getTreatments(rs.getInt(9)));
+
+                    Orders workDay = new Orders(
+                            list2,
+                            rs.getDate(2).toLocalDate(),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getInt(1)
+                    );
+                    list.add(workDay);
+                } while (rs.next());
+                return list;
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return  null;
+    }
+
+    public static ArrayList<Orders> searchInActive(Orders order) {
+        String bookingNameString = "'" + order.getBookingName() + "'";
+        if (order.getBookingName().equals("")) {
+            bookingNameString = "bookingName";
+        }
+
+        String bookingPhoneNumberString = "'" + order.getBookingPhoneNumber() + "'";
+        if (order.getBookingPhoneNumber().equals("")) {
+            bookingPhoneNumberString = "bookingPhoneNumber";
+        }
+
+        String bookingOrderIDString = "'" + order.getBookingID() + "'";
+        if (order.getBookingID() == 0) {
+            bookingOrderIDString = "orderID";
+        }
+
+        String mySQL = "SELECT * FROM orders.monika WHERE bookingName = " + bookingNameString +
+                " AND bookingPhoneNumber = " + bookingPhoneNumberString +
+                " AND orderID = " + bookingOrderIDString;
+
+        try {
+
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(mySQL);
+            ArrayList<Orders> list = new ArrayList<>();
+
+
+            if (rs.next()) {
+                do {
+                    ArrayList<Treatments> list2 = new ArrayList<>();
+                    list2.add(getTreatments(rs.getInt(9)));
+
+                    Orders workDay = new Orders(
+                            list2,
+                            rs.getDate(2).toLocalDate(),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getInt(1)
+                    );
+                    list.add(workDay);
+                } while (rs.next());
+                return list;
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return  null;
+    }
 
 
 
